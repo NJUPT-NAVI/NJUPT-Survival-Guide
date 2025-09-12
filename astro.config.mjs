@@ -44,6 +44,8 @@ export default defineConfig({
             // 也可以继续添加更多子分组
             // { label: '报到流程', autogenerate: { directory: 'freshman/registration' } },
 			{ label: '校区导航', autogenerate: { directory: 'freshman/campus_introduction' } },
+
+			{ label: '多而杂的默认密码', slug: 'freshman/njupt_default_psw' },
           ],
         },
 				{

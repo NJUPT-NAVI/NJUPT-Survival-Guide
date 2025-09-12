@@ -1,0 +1,47 @@
+---
+title: 快速上手
+description: 解释项目详细的开发流程和架构
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+#### [NJUPT-Survival-Guide](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide)
+这是文档存放仓库本体，采用的技术栈是`Astro`的`starlight`，文档可以使用`Markdown`和`MDX`两种格式编写。
+
+##### TODO 介绍或者重构文件夹架构
+
+
+#### [njupt-navi.github.io](https://github.com/NJUPT-NAVI/njupt-navi.github.io)
+这是部署网站的仓库，使用`GitHub Pages`进行部署。两个仓库之间依靠`GitHub Actions`进行联动。
+
+#### 如何创建一个页面
+非常简单的教程，请参考[starlight的文档](https://starlight.astro.build/zh-cn/guides/pages/)
+
+如果你仍然觉得复杂，拿你直接照猫画虎，复制已有的`.mdx`文件，修改其中的内容即可。
+
+#### 关于路径别名
+根目录下的`tsconfig.json`中配置了路径别名`@assets`，指向`src/assets`，和`@components`，指向`src/components`。在编写文档时可以直接使用别名进行引用。参考[Astro 导入别名](https://docs.astro.build/zh-cn/guides/typescript/#path-aliases)。
+
+#### 如何修改侧边栏目录
+请参考[starlight的文档](https://starlight.astro.build/zh-cn/guides/sidebar/)。
+
+#### 如何编写一个自定义组件
+本项目自定义的组件均放在`src/components`目录下:
+<FileTree>
+
+- astro.config.mjs
+- package.json
+- src
+  - assets
+  - components
+    - ImageComponent.astro
+    - ThemedImage.astro
+    - ...
+  - content
+
+</FileTree>
+关于如何编写组件，你可以参考：
+    - [Astro官方文档](https://docs.astro.build/zh-cn/getting-started/)
+    - [Starlight 重新写组件](https://starlight.astro.build/zh-cn/guides/overriding-components/)。
+当然你可以直接去~~抄~~借鉴这个项目的[组件](https://github.com/Athena-OS/athena-docs/tree/main/src/components)
+

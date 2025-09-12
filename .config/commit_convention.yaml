@@ -16,5 +16,10 @@ scopes:
   - Commit Convention: 提交规范
   - GitHub Action: GitHub 工作流
   - Astro Config: Astro 配置
-  - Scripts: 脚本
-  - Docs: 文档
+  - Scripts: Bash 脚本
+  - Contribution: 贡献
+  - Components: 组件
+  - Guides: 主目录
+  - Freshman: 新生篇
+  - Index: 封面
+

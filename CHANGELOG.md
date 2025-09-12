@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.5.0...v1.6.0) (2025-09-12)
+
+
+### Features
+
+* **Contribution:** 使用starlight组件美化了内容 ([32be085](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/32be085216c6ac6394587505a781b7069b961463))
+* **Freshman:** 增加了食堂和快递站介绍 ([7fb22da](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/7fb22daec9c3d3added8ae0fdb639d520ac6ccbb))
+* 根据新的内容增加commit范围 ([f67eeab](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/f67eeabf534605ff6a693f33c93418862cc26b3e))
+
 # [1.5.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.4.0...v1.5.0) (2025-09-12)
 
 

@@ -3,6 +3,9 @@ title: 如何为本项目贡献
 description: 贡献本指南的方式与流程说明
 ---
 
+import { FileTree } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
 #### 需要准备什么？
 
 :::note[需要准备的工具]
@@ -15,16 +18,18 @@ description: 贡献本指南的方式与流程说明
 :::tip[需要了解的知识]
 - [Git 协作管理项目](https://www.runoob.com/git/git-workflow.html)
 - [Markdown 语法](https://markdown.com.cn/)
-- 本项目开发规范，见下文
+- [本项目开发规范](../conventions)，见后文
 :::
 
 ### 本地如何开发
 - 请参考`README.md` 中[快速开始](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B%E5%BC%80%E5%8F%91)完成在本地的部署
-- `Markdown`的语法非常简单，推荐查看[Markdown 教程](https://markdown.com.cn/)
+- `Markdown`语法简单，推荐查看[Markdown 教程](https://markdown.com.cn/) ，本项目主要采用`MDX`语法，`MDX`是`Markdown`的超集，推荐[MDX 教程](https://mdxjs.com/)。  
 - `Astro + starlight`的扩展语法请参考[starlight 文档](https://starlight.astro.build/zh-cn/guides/authoring-content/)
 - 合理使用`AI`工具可以帮助你快速理解项目和编写内容。
 
 ### 如何提交贡献
+
+<Steps>
 1. 分支修改请勿在`main`分支上进行，请签出新的开发分支上进行修改，如果你有权限可以直接在本仓库创建新分支，如果没有权限请先`Fork`本项目到你的账号下，然后在你的账号下创建新分支
 2. 编写你的修改
 3. 在`commit message`中请简要描述你的修改内容，你可以参考我们之前的信息。
@@ -35,3 +40,4 @@ description: 贡献本指南的方式与流程说明
     :::
 4. 提交你的修改并推送，然后发起`Pull Request`
 5. 等待合作者进行内容审查，审查通过后会合并你的修改
+</Steps>

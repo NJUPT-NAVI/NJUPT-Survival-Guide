@@ -6,7 +6,7 @@ description: 仙林校区的详细介绍
 import ImageComponent from "@components/ImageComponent.astro";
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-
+import { Steps } from '@astrojs/starlight/components';
 
 <Tabs>
     <TabItem label="新地图">
@@ -35,17 +35,52 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ### 食堂介绍
 
+<Steps>
+
+1. 南一
+   - 定位：最早的三层老食堂，梅兰一条街末端，靠近**教学楼**（附近：**蜜雪冰城、二手书店**）
+   - 楼层：
+     - 1F 甜品/饮料 + 快餐；
+     - 2F（外侧）新疆风味；
+     - 3F 台球馆 / 家常菜 / 火锅
+   - 高峰：工作日 11:40–12:10，18:00 前后
+    :::tip[小贴士]
+    - 3F 桌子上有免费插座
+    :::
+
+2. 南二
+   - 定位：三层，靠近图书馆与晨跑起点
+   - 楼层：
+     - 1F（兰苑侧）**小卖部** / （菊苑侧）**烘焙店**；
+     - 2F 称重自选菜；
+     - 3F 健身器材 / 招聘活动
+   - 高峰：晨跑后、11:45、18:00
+
+3. 南三
+   - 定位：最新翻新（2025 暑期）两层，含 **蜜雪冰城 / 麦当劳 / 小吃街**；外有**大型超市**
+   - 楼层：
+     - 1F 快餐 + 烘焙 + 品牌档口；
+     - 2F 甜品店 + 咖啡店 
+     - 2F 侧面 小卖部 + **麦当劳** + 小吃街延伸档
+   - 高峰：晨跑日 7:20–7:40；午 11:50；晚 18:10 左右
+
+</Steps>
+
 ### 宿舍介绍
 
 
 <Tabs>
   <TabItem label="桃苑">
+  > 拿快递最方便的一集
     - **是否翻新:** 少部分翻新
     - **男女:** 男
     - **寝室人数:** 4-5
     - **优缺点:** 靠近南三食堂、距离快递站、东门近、远离教学楼
     - **床大小:** 190 x 90
     - **上床下桌:** 是
+    - **外卖地点:** 
+      - 校内云云餐柜：桃正门外左侧
+      - 美团外卖柜：东门内右侧，有时可能放在李苑后门
   > 实景请参考[B站桃苑相关视频](https://www.bilibili.com/video/BV15L411G7Gv/)
 
   </TabItem>
@@ -71,7 +106,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
     - **男女:** 男
     - **寝室人数:** 3-4
     - **优缺点:** 靠近南二食堂、图书馆、教学楼、附近有猫窝
-    - **床大小:** 190 x 90
+    - **床大小:** 190 x 90（少量210 x 90）
     - **上床下桌:** 是
 
   </TabItem>
@@ -99,6 +134,21 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 </Tabs>
 
 
+
+
+
+### 快递站
+ - 地址:
+   - **科创基地1号菜鸟驿站**：在东门内邮局左侧
+   - **2号菜鸟驿站**：在东门内右侧，美团外卖柜右侧
+     :::tip[小贴士]
+     - 快递站营业结束：20:00
+     - 菜鸟驿站快递首个序列数小于`30`的通常在**2店**，大于`30`的通常在**科创基地1店**
+     :::
+   - **顺丰、京东快递**：在1号菜鸟驿站左侧，李苑后门
+
+
+
 #### 宿舍相关问题
 
 
@@ -107,6 +157,4 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ##### 宿舍可以换吗？
 TODO
-### 快递站介绍
-
 <ImageComponent />

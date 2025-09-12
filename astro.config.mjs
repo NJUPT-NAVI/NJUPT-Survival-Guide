@@ -48,6 +48,14 @@ export default defineConfig({
 			{ label: '多而杂的默认密码', slug: 'freshman/njupt_default_psw' },
           ],
         },
+		{
+			label: '生活篇',
+			items:[
+				{ label: '校园网相关', autogenerate: { directory: 'life/network' } },
+			],
+		},
+
+
 				{
 					label: '如何贡献',
 					autogenerate: { directory: 'contribution' },

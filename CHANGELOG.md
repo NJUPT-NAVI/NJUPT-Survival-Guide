@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.6.1...v1.6.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* **Freshman:** 美化默认密码，修复目录重叠问题 ([#11](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/11)) ([9f31d68](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/9f31d68f46bf9e1c7dadbf1d62276d95839d675b))
+
 ## [1.6.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.6.0...v1.6.1) (2025-09-12)
 
 

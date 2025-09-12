@@ -8,9 +8,7 @@ sidebar:
 import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import ImageComponent from "@components/ImageComponent.astro";
 
-<Aside type="tip">
-若无法登录，请先确认：账号已开通 / 是否已初始化 / 网络是否为校园网 / 是否系统维护。切勿随意把个人账号密码泄露给他人。
-</Aside>
+
 
 ## 快速总览
 
@@ -48,7 +46,7 @@ import ImageComponent from "@components/ImageComponent.astro";
 
   **常见问题**
   - 无法进入：可能尚未为新生批量开通，稍等或看学院通知  
-  - 登录用途：企业微信 / 教师联系 / 竞赛 / 公告订阅等  
+  - 登录用途：企业微信等  
   - 建议密码：与统一认证不同、使用随机强密码  
 
   **入口示意**（智慧校园内位置）：
@@ -72,10 +70,9 @@ import ImageComponent from "@components/ImageComponent.astro";
   <TabItem label="小程序">
   
   - 南邮小程序（企业微信等）使用与智慧校园同步的统一身份认证密码  
-  - 若偶尔“密码错误”但网页版可登录，多为服务端异常或缓存问题  
 
   <Aside type="tip">
-  可尝试退出重新进入 / 清除微信缓存；确认不是全校性故障再考虑重置。
+  可尝试退出重新进入 / 清除微信小程序缓存。
   </Aside>
 
   </TabItem>
@@ -89,19 +86,18 @@ import ImageComponent from "@components/ImageComponent.astro";
 
   **重要提醒**
   - 教务系统与统一认证密码互不影响  
-  - 忘记教务密码：联系辅导员或教学办协助重置  
-  - 访问不稳定时可用校园网直连备用地址：  
+  - 忘记教务密码：联系辅导员协助重置  
     <Aside type="tip">
-    校园网下直连：http://202.119.225.134/
+    稳定访问校园网放大校园网下直连：http://202.119.225.134/
     </Aside>
 
   </TabItem>
 
   <TabItem label="雨课堂">
   
-  - 默认密码：`NJUPT` + 学号后 6 位（示例：学号 B23020199 → NJUPT020199）  
-  - 需绑定学校账号后才生效  
-  - 建议首次登录后修改为独立强密码  
+  仅绑定学校身份时候需要使用，绑定后无需再次登录。
+
+  默认密码：`NJUPT` + 学号后 6 位（示例：学号 B23020199 → NJUPT020199）  
 
   </TabItem>
 
@@ -129,7 +125,7 @@ import ImageComponent from "@components/ImageComponent.astro";
 3. 小程序频繁报错=自己账号问题
    - 实际：有时是服务端故障
 4. 忘了是否改过某密码
-   - 建议：启用本地密码管理器（如 Bitwarden / KeePass）
+   - 建议：启用本地密码管理器 / 纸质备忘
 </Steps>
 
 ---

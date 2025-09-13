@@ -49,6 +49,7 @@ export default defineConfig({
 					label: '生活篇',
 					items: [
 						{ label: '校园网相关', autogenerate: { directory: 'life/network' } },
+						{ label: '快递相关', autogenerate: { directory: 'life/express' } },
 					],
 				},
 

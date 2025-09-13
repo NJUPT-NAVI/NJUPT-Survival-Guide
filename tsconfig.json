@@ -10,6 +10,9 @@
       ],
       "@assets/*": [
         "src/assets/*"
+      ],
+      "@docs/*": [
+        "src/content/docs/*"
       ]
     },
   }

@@ -1,0 +1,173 @@
+---
+title: 校园网自动登录脚本
+description: 南邮校园网自动登录脚本的跨平台解决方案（Windows / Linux / macOS / Android）
+---
+
+import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Aside type="note" title="项目地址">
+项目开源仓库：<a href="https://github.com/lux-QAQ/NJUPT_Fastlogin" target="_blank">NJUPT_Fastlogin</a> （如果觉得有用欢迎 Star ⭐）
+</Aside>
+
+## 为什么需要它？
+
+正常登录需打开 <code>https://p.njupt.edu.cn/a79.htm</code>，手动输入账号密码。  
+该工具将这一过程“本地构造 GET 包 + 直接发出”，实现**自动化**。
+
+<Aside type="tip" title="原理简介">
+校园网登录实质：向认证网关（示例：<code>https://p.njupt.edu.cn:802</code> 或其 IP）发送带用户名、密码的 GET 请求。  
+脚本：跳过 DNS（直接使用 IP）+ 极小 C/汇编实现 → 减少解析与启动开销。
+</Aside>
+
+## 特性
+
+<Tabs>
+  <TabItem label="优点">
+  1. <strong>极致速度</strong>：<code>version2_ASM.cpp</code> 平均 ~ <strong>8.430ms</strong>  
+  2. <strong>梯子无影响</strong>：直连网关 IP，绕过慢速 DNS  
+  3. <strong>零第三方依赖</strong>：仅标准 C + 少量汇编  
+  4. <strong>Android 免编译</strong>：直接下载 Release 即用  
+  5. <strong>可泛化</strong>：理论上支持结构相似的 GET 认证门户（改 URL 参数）
+  </TabItem>
+
+  <TabItem label="缺点">
+  1. 需本地编译（除 Android）  
+  2. 更换账号需改宏再重新编译（为速度进行硬编码）  
+  3. 不提供桌面平台编译产物（安全 / 硬编码因素）  
+  4. 网关 IP 若变化需重新修改源码  
+  5. 无 SSL：流量明文（请避开不可信网络环境）
+  </TabItem>
+
+  <TabItem label="版本说明">
+  <ul>
+    <li><code>version1_API.cpp</code>：Win API 版本（略慢 ~1ms）</li>
+    <li><code>version2_ASM.cpp</code>：汇编强化，速度最快</li>
+    <li><code>version2_ASMcross.cpp</code>：跨平台 C/ASM 混合（Windows / Linux / macOS）<strong>推荐</strong></li>
+    <li><code>Android v1.5</code>：APK 于 Release</li>
+  </ul>
+  <Aside type="note">
+  默认在 <code>clang</code> 下测试。不保证 <code>msvc</code> 编译通过；若仅装 VS，请新建工程复制源码`version3_ASMall.cpp`编译。
+  </Aside>
+  </TabItem>
+</Tabs>
+
+## 运营商参数
+
+| WIFI 名称 | NJUPT | NJUPT-CMCC | NJUPT-CHINANET |
+| --------- | ----- | ---------- | -------------- |
+| 运营商    | 校园网 | 移动       | 电信           |
+| 账号后缀  | （去掉 @） | @CMCC | @njxy |
+| 示例账号  | B23****** | B23******@CMCC | B23******@njxy |
+
+
+
+## 快速开始
+
+<Tabs>
+  <TabItem label="Android">
+  [![Android 视频教程](https://i2.hdslb.com/bfs/archive/9281b9203e08a67232165e417ef0aae2c767e84b.jpg@154w_87h)](https://www.bilibili.com/video/BV1MuRWY4Ema/)
+
+  <Steps>
+  1. 前往 Release 下载 APK  
+  2. 首次启动：输入账号 / 密码，选择运营商保存  
+  3. 之后一键登录（可添加桌面快捷方式）
+  </Steps>
+  </TabItem>
+
+  <TabItem label="Windows / Linux / macOS">
+  [![Windows / Linux / macOS 视频教程](https://i2.hdslb.com/bfs/archive/61f58444f3570f2753e5b624f77816e1739f50d5.jpg@154w_87h)](https://www.bilibili.com/video/BV1MuRWY4E2b/)
+
+  <Steps>
+  1. 准备环境  
+     - Windows：<code>Clang</code>/<code>GCC</code> 或 VS（建议 Clang）  
+     - Linux / macOS：<code>Clang</code> / <code>GCC</code>
+  2. 克隆仓库  
+     <code>git clone https://github.com/lux-QAQ/NJUPT_Fastlogin.git</code>
+  3. 选择源码版本  
+     推荐：<code>version2_ASMcross.cpp</code>
+  4. 修改账号宏 （<a href="#运营商参数">如何构造账号？</a>）  
+     <pre><code class="language-cpp">#define USERNAME "你的账号" 
+#define PASSWORD "你的密码"</code></pre>
+  1. 编译（示例）  
+     > **请参考每个`.cpp`文件中注释给出的编译指令**
+  2. 运行与集成  
+     <code>./main</code>；可放启动项 / 定时任务 / 桌面快捷方式
+  </Steps>
+  <Aside type="note">
+  遇到编译问题可提 Issue；不会编译可加 QQ：1098346640（有空再回复）。
+  </Aside>
+  </TabItem>
+
+  <TabItem label="常见问题">
+    <ul>
+      <li>编译失败（权限 / 编码）→ 使用英文路径；确认安装 clang / gcc</li>
+      <li>运行无响应 → 可能网关 IP 变化，更新源码常量再编译</li>
+      <li>偶发断开 → 网络波动；抓包看是否返回 200 / 302</li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+## 性能测试
+
+```shell
+========== 性能测试开始 ==========
+每个程序将运行 1000 次
+
+测试 version1_API.exe...
+成功运行次数: 1000/1000
+
+测试 version2_ASM.exe...
+成功运行次数: 1000/1000
+
+========== 测试结果 ==========
+version1_API.exe 总运行时间: 9.265 秒
+version2_ASM.exe 总运行时间: 8.322 秒
+
+version1_API.exe 平均运行时间: 9.265 毫秒/次
+version2_ASM.exe 平均运行时间: 8.322 毫秒/次
+version2_ASM.exe 比 version1_API.exe 快 1.11 倍
+```
+
+
+
+## 安全性与风险
+
+
+
+特征（易被安全软件误判 **“误杀”** ）：
+- 体积小
+- 启动即发网络请求
+- 无 UI / 少交互
+- 硬编码账号
+
+<Aside type="tip">
+更多说明见仓库 [README 的“安全性”章节](https://github.com/lux-QAQ/NJUPT_Fastlogin/blob/main/README.md#%E5%AE%89%E5%85%A8%E6%80%A7)。
+</Aside>
+
+## TODO / 规划
+
+- [x] Windows
+- [x] Linux
+- [x] macOS
+- [x] Android
+- [ ] 配置文件支持
+- [ ] IPv6 登录
+- [ ] 多运营商自动探测
+- [ ] 适配其他高校门户
+
+## 免责声明
+
+<Aside type="caution">
+1. 仅供学习研究，请勿用于违规用途。<br/>
+2. 未使用 SSL，风险自评估后再使用。<br/>
+3. 使用前请审阅源码，自行承担风险。
+</Aside>
+
+## License
+
+本项目基于 <strong>CC BY-NC 4.0</strong>（署名-非商业）协议：  
+禁止任何形式的商业使用；违者与本项目作者无关。
+
+![CC BY-NC License](https://licensebuttons.net/l/by-nc/4.0/88x31.png)
+
+---

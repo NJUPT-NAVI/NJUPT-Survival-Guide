@@ -1,0 +1,234 @@
+---
+import { shuttleDirections } from '../../data/shuttle';
+import ShuttleRouteCard from './ShuttleRouteCard.astro';
+
+const first = shuttleDirections[0]?.id;
+---
+<section class="shuttle-board" data-active-direction={first}>
+  <div class="header">
+    <div class="tabs" role="tablist" aria-label="校车方向">
+      {shuttleDirections.map((d, index) => (
+        <button
+          class:list={["tab", { 'is-active': index === 0 }]}
+          data-controls={d.id}
+          id={`tab-${d.id}`}
+          role="tab"
+          aria-selected={index === 0 ? "true" : "false"}
+          aria-controls={`panel-${d.id}`}
+          tabindex={index === 0 ? "0" : "-1"}
+          type="button"
+        >
+          {d.label}
+        </button>
+      ))}
+    </div>
+    {shuttleDirections.map((d, index) => (
+      <div 
+        class:list={["hero", { 'is-active': index === 0 }]}
+        data-content={d.id} 
+        style={`--bg:${d.gradient || 'linear-gradient(135deg,#4ade80,#60a5fa)'};`}
+      >
+        <div class="direction">
+          <span class="from">{d.from}</span>
+          <span class="arrow">→</span>
+          <span class="to">{d.to}</span>
+        </div>
+        <div class="meta">
+          <span class="updated">更新：{d.updated}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {shuttleDirections.map((d, index) => (
+    <div
+      class:list={["routes", { 'is-active': index === 0 }]}
+      data-content={d.id}
+      id={`panel-${d.id}`}
+      role="tabpanel"
+      aria-labelledby={`tab-${d.id}`}
+    >
+      {d.trips.map(t => <ShuttleRouteCard trip={t} />)}
+    </div>
+  ))}
+</section>
+
+<script>
+  // 使用更明确的类型并添加空检查
+  const board = document.querySelector('.shuttle-board') as HTMLElement;
+  if (!board) {
+    console.error('找不到.shuttle-board元素');
+    throw new Error('找不到.shuttle-board元素');
+  }
+  
+  const tabs = [...board.querySelectorAll('.tab')] as HTMLButtonElement[];
+  const contents = [...board.querySelectorAll('[data-content]')] as HTMLElement[];
+
+  function activateTab(targetTab: HTMLButtonElement) {
+    const targetId = targetTab.dataset.controls;
+    if (!targetId) return;
+
+    // 更新所有按钮状态
+    tabs.forEach(tab => {
+      const isActive = tab === targetTab;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    // 更新所有内容区域的显示状态
+    contents.forEach(content => {
+      const isActive = content.dataset.content === targetId;
+      content.classList.toggle('is-active', isActive);
+    });
+
+    // 更新父容器状态
+    board.dataset.activeDirection = targetId;
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab));
+  });
+
+  // 键盘导航
+  board.addEventListener('keydown', e => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.tab')) return;
+
+    let currentIndex = tabs.findIndex(t => t.classList.contains('is-active'));
+    let nextIndex = -1;
+
+    if (e.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (e.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (e.key === 'Home') {
+      nextIndex = 0;
+    } else if (e.key === 'End') {
+      nextIndex = tabs.length - 1;
+    }
+
+    if (nextIndex !== -1) {
+      e.preventDefault();
+      tabs[nextIndex].focus();
+      activateTab(tabs[nextIndex]);
+    }
+  });
+</script>
+
+<style>
+.shuttle-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.tabs {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start; /* 确保左对齐 */
+}
+
+.tab {
+  width: 120px; 
+  height: 42px;
+  background: var(--sl-color-gray-6);
+  border: 1px solid transparent;
+  padding: 0;
+  margin: 0; 
+  border-radius: 999px;
+  font-size: .85rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--sl-color-text);
+  transition: background .2s, color .2s, opacity .2s;
+  opacity: .7;
+  
+  /* 使用flexbox确保文本完全居中 */
+  display: inline-flex; /* 改为inline-flex防止不必要的块级特性 */
+  align-items: center;
+  justify-content: center;
+  
+  flex-shrink: 0;
+  box-sizing: border-box;
+  vertical-align: middle; /* 确保垂直居中对齐 */
+}
+.tab:hover {
+  opacity: 1;
+}
+.tab:focus-visible{
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+}
+/* 选中的按钮样式，使用蓝色作为背景 */
+.tab.is-active {
+  background: var(--sl-color-accent); /* Starlight 的主题蓝色 */
+  color: var(--sl-color-bg);
+  opacity: 1;
+}
+
+/* 默认隐藏所有内容 */
+.hero, .routes {
+  display: none;
+}
+
+/* 仅显示 is-active 的内容 */
+.hero.is-active, 
+.routes.is-active {
+  display: flex;
+}
+
+.hero {
+  border-radius: 22px;
+  padding: 1.3rem 1.4rem 1.4rem;
+  background: var(--bg);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg,rgba(255,255,255,.08),rgba(0,0,0,.15));
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.direction {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  display: flex;
+  gap: .6rem;
+  align-items: baseline;
+}
+.direction .arrow {
+  font-size: 1.4rem;
+  opacity: .85;
+}
+.meta {
+  margin-top: .6rem;
+  font-size: .75rem;
+  letter-spacing: .5px;
+  opacity: .9;
+}
+
+.routes {
+  gap: 1rem;
+  flex-direction: column;
+}
+
+@media (max-width: 640px){
+  .direction { font-size: 1.5rem; }
+  .hero { min-height: auto; }
+}
+</style>

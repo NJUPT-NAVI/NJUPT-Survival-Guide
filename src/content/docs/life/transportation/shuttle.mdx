@@ -1,0 +1,22 @@
+---
+title: 校车
+description: 南京邮电大学校区之间校车时刻与线路
+---
+
+import ShuttleBoard from '@components/transportation/ShuttleBoard.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+如有最新发车时间与增减班次请提交 [PR](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/pulls) 或者 [Issue](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues) 更新 <code>src/data/shuttle.ts</code>。
+</Aside>
+
+<ShuttleBoard />
+
+## 维护方式
+
+1. 修改 <code>src/data/shuttle.ts</code> 中的 <code>shuttleDirections</code> 数组  
+2. 每个方向里的 <code>trips</code> 数组即具体班次  
+3. <code>stops</code> 中不再重复写起终点，只写途经站；可给 <code>eta</code> 添加预计时间  
+4. 新增运营方向：复制一个对象，改 <code>id / label / from / to / gradient / trips</code>。  
+
+> 如果想把“班次颜色”扩展，给 <code>ShuttleRouteCard.astro</code> 的 <code>colorMap</code> 添加键值并在 CSS 中新增对应变量。

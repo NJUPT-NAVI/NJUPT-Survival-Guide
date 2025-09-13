@@ -1,0 +1,287 @@
+---
+import type { ShuttleTrip } from "../../data/shuttle";
+interface Props {
+    trip: ShuttleTrip;
+}
+const { trip } = Astro.props;
+---
+
+<article class="route-card" data-color={trip.color}>
+    <div class="timeline">
+        <div class="stop-item start">
+            <div class="marker"></div>
+            <div class="details">
+                <div class="time-label">
+                    <span class="time">{trip.departure}</span>
+                    <span class="label">始发站</span>
+                </div>
+                <div class="station-name">{trip.start}</div>
+            </div>
+        </div>
+
+        <div class="intermediate-stops-wrapper">
+            <div class="intermediate-stops-inner">
+                {
+                    trip.stops.map((s) => (
+                        <div class="stop-item intermediate">
+                            <div class="marker" />
+                            <div class="details">
+                                <div class="station-name">{s.name}</div>
+                                {s.eta && (
+                                    <div class="eta-label">预计 {s.eta}</div>
+                                )}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div class="stop-item end">
+            <div class="marker"></div>
+            <div class="details">
+                <div class="time-label">
+                    {trip.arrival && <span class="time">{trip.arrival}</span>}
+                    <span class="label">终点站</span>
+                </div>
+                <div class="station-name">{trip.end}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span class="days">{trip.days}</span>
+        {
+            trip.stops.length > 0 && (
+                <button class="toggle" type="button" aria-expanded="false">
+                    <span class="show-more">途经站</span>
+                    <span class="show-less">收起</span>
+                </button>
+            )
+        }
+    </div>
+</article>
+
+<script>
+    function computeTimeline(tl) {
+        const markers = tl.querySelectorAll(".stop-item .marker");
+        if (markers.length < 2) return;
+        const first = markers[0].getBoundingClientRect();
+        const last = markers[markers.length - 1].getBoundingClientRect();
+        const box = tl.getBoundingClientRect();
+        const top = first.top + first.height / 2 - box.top;
+        const height = last.top + last.height / 2 - box.top - top;
+        tl.style.setProperty("--line-top", top + "px");
+        tl.style.setProperty("--line-height", height + "px");
+    }
+
+    function attach(tl) {
+        computeTimeline(tl);
+        const ro = new ResizeObserver(() =>
+            requestAnimationFrame(() => computeTimeline(tl)),
+        );
+        ro.observe(tl);
+    }
+
+    function init() {
+        document.querySelectorAll(".route-card .timeline").forEach(attach);
+        document.querySelectorAll(".route-card .toggle").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const card = btn.closest(".route-card");
+                const wrap = card.querySelector(".intermediate-stops-wrapper");
+                const ex = btn.getAttribute("aria-expanded") === "true";
+                btn.setAttribute("aria-expanded", String(!ex));
+                wrap.classList.toggle("expanded", !ex);
+                // Use a short delay to allow the layout to update before re-computing
+                setTimeout(
+                    () => computeTimeline(card.querySelector(".timeline")),
+                    50,
+                );
+            });
+        });
+        // This listener is not strictly necessary if attach() handles resize, but can be a fallback.
+        window.addEventListener("resize", () => {
+            document
+                .querySelectorAll(".route-card .timeline")
+                .forEach(computeTimeline);
+        });
+    }
+
+    // Directly call init() to ensure it runs.
+    init();
+</script>
+
+<style>
+    .route-card {
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 14px;
+        padding: 1rem 1.25rem 0.9rem;
+        background: var(--sl-color-bg);
+        position: relative;
+        --route-color: var(--sl-color-accent);
+        --line-color: var(--sl-color-gray-5);
+        --col: 1.6rem;
+        --marker-size: 0.9rem;
+        --marker-small-size: 0.55rem;
+        --marker-border: 2px;
+        --gap-text: 0.45rem;
+        --marker-top-offset: 0.3rem;
+    }
+    .route-card[data-color="red"] {
+        --route-color: #ef4444;
+    }
+    .route-card[data-color="blue"] {
+        --route-color: #3b82f6;
+    }
+    .route-card[data-color="orange"] {
+        --route-color: #f59e0b;
+    }
+    .route-card[data-color="green"] {
+        --route-color: #10b981;
+    }
+
+    .timeline {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        --line-top: 0px;
+        --line-height: 0px;
+    }
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: calc(var(--col) / 2 - 1px);
+        top: var(--line-top);
+        height: var(--line-height);
+        width: 2px;
+        background: var(--line-color);
+    }
+
+    .stop-item {
+        --m-size: var(--marker-size);
+        position: relative;
+        padding-left: calc(
+            var(--col) / 2 + var(--m-size) / 2 + var(--marker-border) +
+                var(--gap-text)
+        );
+        margin: 0 0 1.1rem;
+        display: flex;
+    }
+    .stop-item:last-child {
+        margin-bottom: 0;
+    }
+    .stop-item.intermediate {
+        --m-size: var(--marker-small-size);
+    }
+
+    .marker {
+        position: absolute;
+        left: calc(var(--col) / 2 - (var(--m-size) / 2 + var(--marker-border)));
+        top: var(--marker-top-offset);
+        width: var(--m-size);
+        height: var(--m-size);
+        background: var(--sl-color-gray-4);
+        border: var(--marker-border) solid var(--sl-color-bg);
+        border-radius: 50%;
+        box-sizing: content-box;
+        z-index: 1;
+    }
+    .stop-item.start .marker,
+    .stop-item.end .marker {
+        background: var(--route-color);
+    }
+    .stop-item.intermediate .marker {
+        top: calc(
+            var(--marker-top-offset) +
+                (var(--marker-size) - var(--marker-small-size)) / 2
+        );
+    }
+
+    .details {
+        padding-top: 0.05rem;
+    }
+    .time-label,
+    .label {
+        font-size: 0.72rem;
+        color: var(--sl-color-gray-2);
+        display: flex;
+        gap: 0.3rem;
+        line-height: 1.05;
+        align-items: baseline;
+    }
+    .time {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--route-color);
+    }
+    .station-name {
+        font-size: 0.85rem;
+        font-weight: 500;
+        line-height: 1.25;
+        margin-top: 0.14rem;
+    }
+    .stop-item.start .station-name,
+    .stop-item.end .station-name {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-top: 0.2rem;
+    }
+    .eta-label {
+        font-size: 0.7rem;
+        color: var(--sl-color-gray-3);
+        margin-top: 0.15rem;
+    }
+
+    .intermediate-stops-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s ease;
+    }
+    .intermediate-stops-inner {
+        overflow: hidden;
+    }
+    .intermediate-stops-wrapper.expanded {
+        grid-template-rows: 1fr;
+    }
+
+    .footer {
+        margin-top: 0.55rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: calc(
+            var(--col) / 2 + var(--marker-size) / 2 + var(--marker-border) +
+                var(--gap-text)
+        );
+    }
+    .days {
+        font-size: 0.78rem;
+        color: var(--sl-color-gray-2);
+        white-space: nowrap;
+    }
+    .toggle {
+        background: var(--sl-color-gray-6);
+        color: var(--sl-color-text);
+        border: 0;
+        padding: 0.45rem 0.85rem; 
+        font-size: 0.85rem;      
+        border-radius: 999px;
+        cursor: pointer;
+        line-height: 1;
+    }
+    .toggle .show-less {
+        display: none;
+    }
+    .toggle[aria-expanded="true"] .show-more {
+        display: none;
+    }
+    .toggle[aria-expanded="true"] .show-less {
+        display: inline;
+    }
+
+    @media (hover: hover) {
+        .route-card:hover {
+            border-color: var(--route-color);
+        }
+    }
+</style>

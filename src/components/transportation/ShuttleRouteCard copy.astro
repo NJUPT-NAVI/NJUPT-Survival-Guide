@@ -1,0 +1,222 @@
+---
+import type { ShuttleTrip } from "../../data/shuttle";
+
+interface Props {
+    trip: ShuttleTrip;
+}
+
+const { trip } = Astro.props;
+---
+<article class="route-card" data-color={trip.color}>
+    <div class="card-content">
+        <div class="timeline">
+            <!-- 起始站 -->
+            <div class="stop-item start">
+                <div class="marker-line">
+                    <div class="marker"></div>
+                </div>
+                <div class="details">
+                    <div class="time-label">
+                        <span class="time">{trip.departure}</span>
+                        <span class="label">始发站</span>
+                    </div>
+                    <div class="station-name">{trip.start}</div>
+                </div>
+            </div>
+
+            <!-- 途经站 (可折叠部分) -->
+            <div class="intermediate-stops">
+                {trip.stops.map((stop) => (
+                    <div class="stop-item intermediate">
+                        <div class="marker-line">
+                            <div class="marker"></div>
+                        </div>
+                        <div class="details">
+                            <div class="station-name">{stop.name}</div>
+                            {stop.eta && <div class="eta-label">预计 {stop.eta}</div>}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <!-- 终点站 -->
+            <div class="stop-item end">
+                <div class="marker-line">
+                    <div class="marker"></div>
+                </div>
+                <div class="details">
+                    <div class="label">终点站</div>
+                    <div class="station-name">{trip.end}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="days">{trip.days}</span>
+            {trip.stops.length > 0 && (
+                 <button class="toggle" type="button" aria-expanded="false">
+                    <span class="show-more">途经站</span>
+                    <span class="show-less">收起</span>
+                </button>
+            )}
+        </div>
+    </div>
+</article>
+
+<script>
+    document.querySelectorAll('.route-card .toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.route-card');
+            const intermediateStops = card.querySelector('.intermediate-stops');
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            btn.setAttribute('aria-expanded', String(!isExpanded));
+            intermediateStops.classList.toggle('expanded', !isExpanded);
+        });
+    });
+</script>
+
+<style>
+    .route-card {
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        background: var(--sl-color-bg);
+        position: relative;
+        overflow: hidden;
+    }
+    .route-card[data-color] {
+        --route-color: var(--sl-color-accent);
+    }
+    .route-card[data-color="red"] { --route-color: #ef4444; }
+    .route-card[data-color="blue"] { --route-color: #3b82f6; }
+    .route-card[data-color="orange"] { --route-color: #f59e0b; }
+    .route-card[data-color="green"] { --route-color: #10b981; }
+
+    .timeline {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stop-item {
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .marker-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 2rem; /* 标记和线的容器宽度 */
+        flex-shrink: 0;
+    }
+
+    .marker {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background-color: var(--sl-color-gray-4);
+        border: 2px solid var(--sl-color-bg);
+        z-index: 1;
+    }
+
+    .stop-item.start .marker,
+    .stop-item.end .marker {
+        background-color: var(--route-color);
+        transform: scale(1.2);
+    }
+    
+    .intermediate .marker {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+
+    /* 绘制连接线 */
+    .marker-line::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(1rem - 1px); /* (容器宽度/2) - (线宽/2) */
+        width: 2px;
+        background-color: var(--sl-color-gray-5);
+    }
+    .stop-item.start .marker-line::before { top: 0.8rem; }
+    .stop-item.end .marker-line::before { bottom: calc(100% - 0.8rem); }
+
+
+    .details {
+        padding-top: 0.1rem;
+        padding-bottom: 1.5rem;
+    }
+    .stop-item.end .details {
+        padding-bottom: 0;
+    }
+
+    .time-label, .label {
+        font-size: 0.75rem;
+        color: var(--sl-color-gray-2);
+        display: flex;
+        align-items: baseline;
+        gap: 0.3rem;
+    }
+    .time {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--route-color);
+    }
+    .station-name {
+        font-weight: 500;
+        margin-top: 0.1rem;
+    }
+    .eta-label {
+        font-size: 0.75rem;
+        color: var(--sl-color-gray-3);
+        margin-top: 0.1rem;
+    }
+
+    /* 折叠逻辑 */
+    .intermediate-stops {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s ease-out;
+    }
+    .intermediate-stops > .stop-item {
+        overflow: hidden;
+    }
+    .intermediate-stops.expanded {
+        grid-template-rows: 1fr;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.75rem;
+        padding-left: 2rem; /* 与时间线对齐 */
+    }
+    .days {
+        font-size: 0.8rem;
+        color: var(--sl-color-gray-2);
+    }
+    .toggle {
+        background: var(--sl-color-gray-6);
+        color: var(--sl-color-text);
+        border: 0;
+        padding: .4rem .7rem;
+        font-size: .7rem;
+        border-radius: 999px;
+        cursor: pointer;
+        line-height: 1;
+    }
+    .toggle .show-less { display: none; }
+    .toggle[aria-expanded="true"] .show-more { display: none; }
+    .toggle[aria-expanded="true"] .show-less { display: inline; }
+
+    @media (hover: hover) {
+        .route-card:hover {
+            border-color: var(--route-color);
+        }
+    }
+</style>

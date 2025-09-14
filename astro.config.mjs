@@ -16,10 +16,24 @@ export default defineConfig({
 		starlight({
 			title: 'My Docs',
 			logo: {
-				src: './src/assets/logo.jpg',
+				src: './src/assets/logo_2.png',
 				replacesTitle: true,
 			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide' }],
+
+			
+			head: [
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'icon',
+						href: '/favicon.ico',
+						type: 'image/x-icon',
+					},
+				},
+			],
+			
+
 			sidebar: [
 				{
 					label: '目录',

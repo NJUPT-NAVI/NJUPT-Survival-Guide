@@ -1,0 +1,20 @@
+---
+import Default from "@astrojs/starlight/components/Pagination.astro";
+import PageAuthors from "./PageAuthors.astro";
+---
+
+<div>
+  <PageAuthors
+    repo="NJUPT-NAVI/NJUPT-Survival-Guide"
+    file={Astro.locals.starlightRoute.entry.filePath}
+  />
+  <Default><slot /></Default>
+</div>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+</style>

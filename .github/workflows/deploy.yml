@@ -112,6 +112,8 @@ jobs:
       - name: 赋予权限
         run: chmod +x scripts/sync-dist.sh || true
       - name: 构建
+        env:
+          CONTRIBUTOR_INFORMATION_TOKEN: ${{ secrets.CONTRIBUTOR_INFORMATION_TOKEN }}
         run: npm run build
       - name: 部署
         env:

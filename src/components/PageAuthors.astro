@@ -1,0 +1,182 @@
+---
+interface Props {
+  repo: string;
+  file: string;
+}
+const { repo, file } = Astro.props;
+
+const token = import.meta.env.CONTRIBUTOR_INFORMATION_TOKEN;
+let commits: any[] = []; // 初始化为空数组，用于优雅降级
+
+// 方案一：如果 Token 存在，则使用官方 API 进行认证请求
+if (token) {
+  const url = new URL(`https://api.github.com/repos/${repo}/commits`);
+  url.searchParams.set('path', file);
+  url.searchParams.set('per_page', '100');
+
+  const headers: HeadersInit = {
+    Accept: 'application/vnd.github+json',
+    'User-Agent': 'starlight-contributors/1.0',
+    Authorization: `Bearer ${token}`,
+  };
+
+  const response = await fetch(url, { headers }).then((res) => res.json());
+
+  // 只有当认证请求成功并返回数组时，才赋值
+  if (Array.isArray(response)) {
+    commits = response;
+  } else {
+    console.error('Failed to fetch commits using CONTRIBUTOR_INFORMATION_TOKEN. API Response:', response);
+  }
+} 
+// 方案二：如果 Token 不存在，则尝试所有匿名 API 和代理
+else {
+  const endpoints = [
+    `https://api.github.com/repos/${repo}/commits`,
+    `https://jiashu.1win.eu.org/https://api.github.com/repos/${repo}/commits`,
+    `https://spring-night-57a1.3540746063.workers.dev/https://api.github.com/repos/${repo}/commits`,
+  ];
+
+  // 创建一个 fetch 任务，该任务只在成功获取到数组时才算“解决(resolve)”
+  const fetchAsArray = (baseUrl: string) => {
+    const url = new URL(baseUrl);
+    url.searchParams.set('path', file);
+    url.searchParams.set('per_page', '100');
+    return new Promise<any[]>((resolve, reject) => {
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            resolve(data); // 成功，返回数组
+          } else {
+            reject(data); // 失败（如速率限制），拒绝该 Promise
+          }
+        })
+        .catch(reject);
+    });
+  };
+
+  try {
+    // Promise.any 会返回第一个成功解决的 Promise 的结果
+    const successfulCommits = await Promise.any(endpoints.map(fetchAsArray));
+    commits = successfulCommits;
+  } catch (error) {
+    // 只有当所有 Promise 都被拒绝时，才会进入 catch 块
+    console.warn(
+      'All anonymous API endpoints failed (likely due to rate limiting). Contributors will not be displayed.'
+    );
+    // 此时 commits 保持为空数组，实现优雅降级
+  }
+}
+
+
+function removeDuplicates(commits: any[]) {
+  // 这里的检查现在是双重保险
+  if (!Array.isArray(commits)) {
+    return [];
+  }
+
+  const map = new Map();
+  for (const commit of commits) {
+    const author = commit.author;
+    if (author) {
+      map.set(author.id, { login: author.login, id: author.id });
+    }
+  }
+  return Array.from(map.values());
+}
+
+const uniqueAuthors = removeDuplicates(commits);
+---
+
+{/* 模板部分保持不变，当 uniqueAuthors 为空时，它将不会渲染任何内容 */}
+{uniqueAuthors.length > 0 && (
+  <div class="page-authors">
+    <p>本文贡献者</p>
+    <ul class="smol-avatar-list not-content">
+      {uniqueAuthors.map(({ login, id }) => (
+        <li>
+          <a href={`https://github.com/${login}`}>
+            <img alt={`Contributor ${login}`} width="64" height="64" src={`https://avatars.githubusercontent.com/u/${id}`}/>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style define:vars={{ 'avatar-count': uniqueAuthors.length }}>
+/* ... 样式部分保持不变 ... */
+.page-authors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  font-size: var(--sl-text-sm);
+  font-weight: 600;
+}
+
+/* Thank you Stephanie Eckles! https://smolcss.dev/#smol-avatar-list */
+.smol-avatar-list {
+  --avatar-size: 2rem;
+
+  display: grid;
+  /* Default to displaying most of the avatar to
+  enable easier access on touch devices, ensuring
+  the WCAG touch target size is met or exceeded */
+  grid-template-columns: repeat(
+    var(--avatar-count),
+    max(44px, calc(var(--avatar-size) / 1.15))
+  );
+  /* `padding` matches added visual dimensions of
+  the `box-shadow` to help create a more accurate
+  computed component size */
+  padding: 0.08em;
+  font-size: var(--avatar-size);
+  list-style: none;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  .smol-avatar-list {
+    /* We create 1 extra cell to enable the computed 
+    width to match the final visual width */
+    grid-template-columns: repeat(
+      calc(var(--avatar-count) + 1),
+      calc(var(--avatar-size) / 1.75)
+    );
+  }
+}
+
+.smol-avatar-list li {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
+.smol-avatar-list li:hover ~ li a,
+.smol-avatar-list li:focus-within ~ li a {
+  transform: translateX(33%);
+}
+
+.smol-avatar-list img,
+.smol-avatar-list a {
+  display: block;
+  border-radius: 50%;
+}
+
+.smol-avatar-list a {
+  transition: transform 180ms ease-in-out;
+}
+
+.smol-avatar-list img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #fff;
+  box-shadow: 0 0 0 0.05em #fff, 0 0 0 0.08em rgba(0, 0, 0, 0.15);
+}
+
+.smol-avatar-list a:focus {
+  outline: 2px solid transparent;
+  /* Double-layer trick to work for dark and light backgrounds */
+  box-shadow: 0 0 0 0.08em #29344B, 0 0 0 0.12em white;
+}
+</style>

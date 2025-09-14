@@ -21,7 +21,7 @@ export default defineConfig({
 			},
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide' }],
 
-			
+
 			head: [
 				{
 					tag: 'link',
@@ -32,7 +32,7 @@ export default defineConfig({
 					},
 				},
 			],
-			
+
 
 			sidebar: [
 				{
@@ -100,7 +100,9 @@ export default defineConfig({
 					label: 'License',
 					autogenerate: { directory: 'license/' },
 				},
-			],
+			], components: {
+				Pagination: '@components/Pagination.astro',
+			},
 		}),
 	],
 });

@@ -9,6 +9,6 @@ description: 南京邮电大学生存指南简介
 
 **本项目才创立没多久，正在积极开发中。**
 
-**NAVI** 是一个所有人都可以来参**与编写**的[开源项目](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide)。我们相信，通过众人的力量，可以汇聚成最全面、最及时的校园指南。
+**NAVI** 是一个**所有人**都可以来**参与编写**的[开源项目](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide)。我们相信，通过众人的力量，可以汇聚成最全面、最及时的校园指南。
 
 如果你发现信息有误，或希望补充新的内容，欢迎查阅[贡献指南](/contribution/contribution)，与我们一起让这份指南变得更好！

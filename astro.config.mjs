@@ -25,7 +25,7 @@ export default defineConfig({
 					label: '目录',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: '什么是 NVAI', slug: 'guides/introduction' },
+						{ label: '什么是 NAVI', slug: 'guides/introduction' },
 					],
 				},
 

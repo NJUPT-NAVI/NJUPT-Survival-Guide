@@ -1,11 +1,14 @@
 ---
-title: Example Guide
-description: A guide in my new Starlight docs site.
+title: 什么是NAVI
+description: 南京邮电大学生存指南简介
 ---
+### 欢迎来到南京邮电大学生存指南（NJUPT NAVI）！
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+本项目旨在整合各类公开的资源与信息，帮助每一位南邮人（小柚子）更好地在校园中学习和生活，努力消除信息不对称带来的困扰。
 
-## Further reading
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+**本项目才创立没多久，正在积极开发中。**
+
+**NAVI** 是一个所有人都可以来参**与编写**的[开源项目](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide)。我们相信，通过众人的力量，可以汇聚成最全面、最及时的校园指南。
+
+如果你发现信息有误，或希望补充新的内容，欢迎查阅[贡献指南](/contribution/contribution)，与我们一起让这份指南变得更好！

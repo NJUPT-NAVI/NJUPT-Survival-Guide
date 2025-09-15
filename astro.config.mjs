@@ -73,8 +73,12 @@ export default defineConfig({
 
 					],
 				},
-					
-				
+                {
+					label: '学习篇',
+                    items: [
+                        { label: '考试相关', autogenerate: {directory: 'learn/exams'} }
+                    ],
+                },
 
 
 				/* {

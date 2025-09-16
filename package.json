@@ -11,16 +11,17 @@
     "release": "semantic-release"
   },
   "dependencies": {
-    "astro": "^5.6.1",
     "@astrojs/starlight": "^0.35.2",
-    "sharp": "^0.34.2"
+    "astro": "^5.6.1",
+    "sharp": "^0.34.2",
+    "starlight-scroll-to-top": "^0.4.0"
   },
   "devDependencies": {
-    "semantic-release": "^23.1.1",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^11.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/release-notes-generator": "^14.1.0"
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "semantic-release": "^23.1.1"
   }
 }

@@ -1,4 +1,7 @@
 # Njupt Survival Guide
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/db95a7cd-b750-4ab5-a958-a6ae616a332a/deploy-status)](https://app.netlify.com/projects/njuptnavi/deploys)
+
 南京邮电大学生存指南，用于导航和整合各种公开的资源和信息，减少大家的信息差
 
 

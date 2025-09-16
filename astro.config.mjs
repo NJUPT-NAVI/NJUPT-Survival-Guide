@@ -11,7 +11,7 @@ export default defineConfig({
 		}
 	},
 
-	site: 'https://njupt-navi.github.io',
+    site: 'https://njuptnavi.netlify.app',
 	integrations: [
 		starlight({
 			title: 'My Docs',

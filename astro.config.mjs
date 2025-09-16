@@ -76,7 +76,8 @@ export default defineConfig({
                 {
 					label: '学习篇',
                     items: [
-                        { label: '考试相关', autogenerate: {directory: 'learn/exams'} }
+                        { label: '考试相关', autogenerate: {directory: 'learn/exams'} },
+						{ label: '实用工具', autogenerate: { directory: 'learn/useful_tools' }, },
                     ],
                 },
 

@@ -1,0 +1,32 @@
+---
+title: 课程录播
+description: 查看已经上过的课程录播
+---
+
+学校会将所有课程录制后放到[南京邮电大学智慧课堂](https://njupt.smartclass.cn/)这个网站上。
+
+有学长专门开发了[南邮智慧课堂下载器](https://github.com/ArcticLampyrid/njupt_smartclass_downloader)
+可通过终端用户界面将视频内容批量下载到本地观看，并可从 VGA 录音中提取演示幻灯片作为 PDF 文件。
+
+假如你不会使用它，你可以按照以下操作安装：
+
+同时按下 Win + r 键（或者右键你的左下角 windows logo 选择”终端“），输入 `powershell` 并 Enter
+
+将以下命令一条一条的输入并观察是否有网络原因导致的报错（如果你已经有了scoop, poetry, python, git, 请跳过相关安装命令）
+
+```shell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # 安装 scoop
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+scoop install poetry # 使用 scoop 安装 poetry
+scoop bucket add versions
+scoop install python@3.12.0 # 使用 scoop 安装 python 3.12 版本
+scoop install git # 使用 scoop 安装 git
+
+git clone --depth 1 https://github.com/ArcticLampyrid/njupt_smartclass_downloader.git # 使用 git 下载项目
+cd njupt_smartclass_downloader
+poetry env use 3.12
+poetry install
+poetry run njupt-smartclass-downloader
+````
+

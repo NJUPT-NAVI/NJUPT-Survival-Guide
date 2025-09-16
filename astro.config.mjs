@@ -97,6 +97,7 @@ export default defineConfig({
               ],
             },
             { label: "考试相关", autogenerate: { directory: "learn/exams" } },
+            { label: "实用工具", autogenerate: { directory: "learn/yellow_pages" } },
           ],
         },
 

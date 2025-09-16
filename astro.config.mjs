@@ -2,6 +2,8 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightImageZoom from 'starlight-image-zoom';
+import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +17,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "My Docs",
-      plugins: [starlightScrollToTop()],
+      plugins: [starlightScrollToTop(), starlightImageZoom()],
       logo: {
         src: "./src/assets/logo_2.png",
         replacesTitle: true,
@@ -124,5 +126,9 @@ export default defineConfig({
         Pagination: '@components/Pagination.astro',
       },
     }),
+    mermaid({
+      theme: 'forest',
+      autoTheme: true
+    })
   ],
 });

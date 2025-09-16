@@ -65,6 +65,7 @@ export default defineConfig({
 
 						{ label: '校园网相关', autogenerate: { directory: 'life/network' } },
 						{ label: '快递相关', autogenerate: { directory: 'life/express' } },
+						{ label: '充值相关', autogenerate: { directory: 'life/charge' } },
 						{ label: '校车时间地点', autogenerate: { directory: 'life/transportation/' } },
 						{ label: '学校周边设施', autogenerate: { directory: 'life/aroundschool' } },
 

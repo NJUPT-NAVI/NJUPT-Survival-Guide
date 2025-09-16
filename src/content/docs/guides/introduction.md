@@ -12,4 +12,8 @@ GitHub Pages 网址：[njupt-navi.github.io](https://njupt-navi.github.io/)
 
 **NAVI** 是一个**所有人**都可以来**参与编写**的[开源项目](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide)。我们相信，通过众人的力量，可以汇聚成最全面、最及时的校园指南。
 
+本组织及相关项目受到 [上海交通大学生存手册](https://survivesjtu.gitbook.io/survivesjtumanual) 和
+[北京邮电大学生存手册](https://guide.byrdocs.org/) 等项目的启发，在这里向他们表示感谢。
+
 如果你发现信息有误，或希望补充新的内容，欢迎查阅[贡献指南](/contribution/contribution)，与我们一起让这份指南变得更好！
+

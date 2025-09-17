@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
 
-  site: "https://njuptnavi.netlify.app",
+  site: "https://njuptnavi.top",
   integrations: [
     starlight({
       title: "NJUPT-NAVI",
@@ -26,6 +26,11 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
+          href: "https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide",
+        },
+        {
+          icon: "comment",
+          label: "Group",
           href: "https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide",
         },
       ],
@@ -63,6 +68,7 @@ export default defineConfig({
             // { label: '报到流程', autogenerate: { directory: 'freshman/registration' } },
             {
               label: "校区导航",
+              collapsed: true,
               autogenerate: { directory: "freshman/campus_introduction" },
             },
 
@@ -74,16 +80,25 @@ export default defineConfig({
           items: [
             {
               label: "校园网相关",
+              collapsed: true,
               autogenerate: { directory: "life/network" },
             },
-            { label: "快递相关", autogenerate: { directory: "life/express" } },
-            { label: "充值相关", autogenerate: { directory: "life/charge" } },
+            { label: "快递相关", 
+              collapsed: true,
+              autogenerate: { directory: "life/express" } },
+            {
+              label: "充值相关",
+              collapsed: true,
+              autogenerate: { directory: "life/charge" }
+            },
             {
               label: "校车时间地点",
+              collapsed: true,
               autogenerate: { directory: "life/transportation/" },
             },
             {
               label: "学校周边设施",
+              collapsed: true,
               autogenerate: { directory: "life/aroundschool" },
             },
           ],
@@ -93,20 +108,33 @@ export default defineConfig({
           items: [
             {
               label: "编程语言",
+              collapsed: true,
               items: [
                 {
+                  label: "AI",
+
+                  autogenerate: { directory: "learn/AI" },
+                },
+                {
                   label: "C 语言",
+
                   autogenerate: { directory: "learn/program/c/" },
                 },
+
               ],
             },
-            { label: "考试相关", autogenerate: { directory: "learn/exams" } },
+            {
+              label: "考试相关",
+              collapsed: true,
+              autogenerate: { directory: "learn/exams" }
+            },
             {
               label: "图书馆篇",
               autogenerate: { directory: "learn/library"},
             },
             {
               label: "实用工具",
+              collapsed: true,
               autogenerate: { directory: "learn/useful_tools" },
             },
           ],
@@ -114,9 +142,9 @@ export default defineConfig({
 
         /* {
 
-					label: '如何贡献',
-					autogenerate: { directory: 'contribution' },
-				}, */
+          label: '如何贡献',
+          autogenerate: { directory: 'contribution' },
+        }, */
         {
           label: "如何贡献🥳",
           items: [

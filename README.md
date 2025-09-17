@@ -1,4 +1,6 @@
-<img src="https://njuptnavi.top/_astro/NAVI.BMPlSeam_Z1QH86j.webp" width = "300" height = "304" alt="NapCat" align=right />
+<a href="https://njuptnavi.top/" target="_blank" rel="noopener noreferrer">
+  <img src="https://njuptnavi.top/_astro/NAVI.BMPlSeam_Z1QH86j.webp" width="300" height="304" alt="NapCat" align="right" />
+</a>
 <div align="center">
 
 # Njupt Survival Guide

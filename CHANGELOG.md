@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.15.0...v1.16.0) (2025-09-17)
+
+
+### Features
+
+* add windows and office activate script ([612cd95](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/612cd959fe784b79969ef9173d09c5420591c0ef))
+
 # [1.15.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.14.0...v1.15.0) (2025-09-17)
 
 

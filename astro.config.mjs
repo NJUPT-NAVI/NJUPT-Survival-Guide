@@ -1,9 +1,9 @@
 // @ts-check
-import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import starlightScrollToTop from 'starlight-scroll-to-top';
-import starlightImageZoom from 'starlight-image-zoom';
 import mermaid from 'astro-mermaid';
+import { defineConfig } from "astro/config";
+import starlightImageZoom from 'starlight-image-zoom';
+import starlightScrollToTop from 'starlight-scroll-to-top';
 
 // https://astro.build/config
 export default defineConfig({
@@ -103,7 +103,7 @@ export default defineConfig({
             { label: "考试相关", autogenerate: { directory: "learn/exams" } },
             {
               label: "图书馆篇",
-              autogenerate: { directory: "library/resources"},
+              autogenerate: { directory: "learn/library"},
             },
             {
               label: "实用工具",

@@ -4,6 +4,9 @@ import mermaid from 'astro-mermaid';
 import { defineConfig } from "astro/config";
 import starlightImageZoom from 'starlight-image-zoom';
 import starlightScrollToTop from 'starlight-scroll-to-top';
+import partytown from '@astrojs/partytown';
+
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -83,9 +86,11 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: "life/network" },
             },
-            { label: "快递相关", 
+            {
+              label: "快递相关",
               collapsed: true,
-              autogenerate: { directory: "life/express" } },
+              autogenerate: { directory: "life/express" }
+            },
             {
               label: "充值相关",
               collapsed: true,
@@ -130,7 +135,7 @@ export default defineConfig({
             },
             {
               label: "图书馆篇",
-              autogenerate: { directory: "learn/library"},
+              autogenerate: { directory: "learn/library" },
             },
             {
               label: "实用工具",
@@ -164,11 +169,17 @@ export default defineConfig({
       ],
       components: {
         Pagination: "@components/Pagination.astro",
+        Head: "@components/Head.astro", // 全局替换 Head
       },
     }),
     mermaid({
       theme: 'forest',
       autoTheme: true
-    })
+    }),
+    partytown({
+      config: {
+        debug: true
+      }
+    }), // 启用 Partytown 集成
   ],
 });

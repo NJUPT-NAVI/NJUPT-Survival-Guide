@@ -1,0 +1,36 @@
+---
+import DefaultHead from "@astrojs/starlight/components/Head.astro";
+const isDev = import.meta.env.DEV;
+
+
+
+---
+
+<!-- 先渲染 Starlight 默认头部 -->
+<DefaultHead {...Astro.props} />
+
+<!-- 交给 Partytown 执行 -->
+{isDev ? (
+  // 开发环境普通加载，避免 CORS
+
+  <script is:inline>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2cdb704905f3d3c91182539b41ecd352";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+) : (
+  // 生产环境用 Partytown
+  <script is:inline type="text/partytown">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2cdb704905f3d3c91182539b41ecd352";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+)}

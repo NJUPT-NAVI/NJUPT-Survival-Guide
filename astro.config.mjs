@@ -4,7 +4,7 @@ import mermaid from 'astro-mermaid';
 import { defineConfig } from "astro/config";
 import starlightImageZoom from 'starlight-image-zoom';
 import starlightScrollToTop from 'starlight-scroll-to-top';
-import partytown from '@astrojs/partytown';
+//import partytown from '@astrojs/partytown';
 
 
 

@@ -135,6 +135,7 @@ export default defineConfig({
             },
             {
               label: "图书馆篇",
+              collapsed: true,
               autogenerate: { directory: "learn/library" },
             },
             {

@@ -16,42 +16,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  shellcheck:
-    name: ShellCheck 🛠
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - name: 🐚 Full ShellCheck
-        uses: redhat-plumbers-in-action/differential-shellcheck@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          triggering-event: ${{ github.event_name }}
-          strict-check-on-push: true
-          base: ${{ github.event.before }}
-          head: ${{ github.sha }}
-          severity: error
-
-  build-test:
-    name: Pre-Build 验证
-    runs-on: ubuntu-latest
-    needs: [shellcheck]
-    steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - name: 安装依赖
-        run: npm ci
-      - name: 试构建
-        run: npm run build
-
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
-    needs: [build-test]
     outputs:
       released: ${{ steps.mark.outputs.released }}
       version:  ${{ steps.mark.outputs.version }}

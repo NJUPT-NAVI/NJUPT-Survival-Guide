@@ -177,10 +177,10 @@ export default defineConfig({
       theme: 'forest',
       autoTheme: true
     }),
-    partytown({
+/*     partytown({
       config: {
         debug: true
       }
-    }), // 启用 Partytown 集成
+    }), // 启用 Partytown 集成 */
   ],
 });

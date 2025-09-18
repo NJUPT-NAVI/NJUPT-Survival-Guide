@@ -1,36 +1,31 @@
 ---
 import DefaultHead from "@astrojs/starlight/components/Head.astro";
-const isDev = import.meta.env.DEV;
 
-
-
+// 百度统计 siteId
+const BAIDU_TONGJI_ID = "2cdb704905f3d3c91182539b41ecd352";
 ---
 
-<!-- 先渲染 Starlight 默认头部 -->
+<!-- 渲染 Starlight 默认头部 -->
 <DefaultHead {...Astro.props} />
 
-<!-- 交给 Partytown 执行 -->
-{isDev ? (
-  // 开发环境普通加载，避免 CORS
+<!-- 尽早建链DNS，减少阻塞 -->
+<link rel="dns-prefetch" href="//hm.baidu.com" />
+<link rel="preconnect" href="https://hm.baidu.com" crossorigin />
 
-  <script is:inline>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?2cdb704905f3d3c91182539b41ecd352";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-) : (
-  // 生产环境用 Partytown
-  <script is:inline type="text/partytown">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?2cdb704905f3d3c91182539b41ecd352";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-)}
+<!-- 在主线程异步注入 hm.js -->
+<script is:inline>
+  // 初始化队列
+  window._hmt = window._hmt || [];
+  (function() {
+    const ID = "2cdb704905f3d3c91182539b41ecd352";
+    // 防重复注入（热更新或多次渲染时）
+    if (document.getElementById("baidu-hm")) return;
+
+    const s = document.getElementsByTagName("script")[0];
+    const hm = document.createElement("script");
+    hm.id = "baidu-hm";
+    hm.async = true; // 异步，不阻塞主线程
+    hm.src = "https://hm.baidu.com/hm.js?" + ID;
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>

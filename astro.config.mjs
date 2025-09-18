@@ -21,6 +21,10 @@ export default defineConfig({
     starlight({
       title: "NJUPT-NAVI",
       plugins: [starlightScrollToTop(), starlightImageZoom()],
+       customCss: [
+        // 你的自定义 CSS 文件的相对路径
+        '@assets/css/color.css',
+      ],
       logo: {
         src: "./src/assets/logo_2.png",
         replacesTitle: true,

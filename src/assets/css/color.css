@@ -1,0 +1,42 @@
+/* Dark mode colors. */
+:root {
+	--sl-color-accent-low: #00273d;
+	--sl-color-accent: #0071a7;
+	--sl-color-accent-high: #92d1fe;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #e7eff2;
+	--sl-color-gray-2: #bac4c8;
+	--sl-color-gray-3: #7b8f96;
+	--sl-color-gray-4: #495c62;
+	--sl-color-gray-5: #2a3b41;
+	--sl-color-gray-6: #182a2f;
+	--sl-color-black: #121a1c;
+	  /* 左侧 Sidebar 宽度（默认约 20rem） */
+  	--sl-sidebar-width: 15rem; /* 按需改成 14rem/16rem 等 */
+
+  	/* 可选：右侧 ToC（目录）宽度 */
+  	--sl-toc-width: 14rem;
+}
+
+/* 可选：更大屏时再收窄一些 */
+@media (min-width: 1200px) {
+  :root {
+    --sl-sidebar-width: 14rem;
+    --sl-toc-width: 13rem;
+  }
+}
+/* Light mode colors. */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #b0deff;
+	--sl-color-accent: #0073aa;
+	--sl-color-accent-high: #003653;
+	--sl-color-white: #121a1c;
+	--sl-color-gray-1: #182a2f;
+	--sl-color-gray-2: #2a3b41;
+	--sl-color-gray-3: #495c62;
+	--sl-color-gray-4: #7b8f96;
+	--sl-color-gray-5: #bac4c8;
+	--sl-color-gray-6: #e7eff2;
+	--sl-color-gray-7: #f3f7f9;
+	--sl-color-black: #ffffff;
+}

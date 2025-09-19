@@ -6,7 +6,13 @@ import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
 import img1 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/1.jpg';
 
+import img2 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/2.jpg';
+
 import img3 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/3.jpg';
+
+import img4 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/4.jpg';
+
+import img5 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/5.jpg';
 
 
 ## 为什么需要它？
@@ -22,3 +28,33 @@ import img3 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/3.jpg';
   <img src={img1.src} alt="小爱课表示例 1" style="width: clamp(180px, 40vw, 300px); height: auto; border-radius: 8px;" />
   <img src={img3.src} alt="小爱课表示例 3" style="width: clamp(180px, 40vw, 300px); height: auto; border-radius: 8px;" />
 </div>
+
+除此之外，你还可以通过小爱同学，查询课表的各种信息。
+例如询问：“周五上午第一节课什么时候上课”。
+
+<Steps>
+
+1. 初始化
+   - 启用超级小爱
+   - 输入 `课表` 进入课表界面 <img src={img2.src} alt="小爱课表示例 2" style="width: clamp(120px, 30vw, 250px); height: auto; border-radius: 8px;" />
+
+2. **进入导入课表页面**
+   - 在设置设置中点击导入课表，从教务系统导入<img src={img5.src} alt="小爱课表示例 5" style="width: clamp(100px, 20vw, 250px); height: auto; border-radius: 8px;" />
+   :::caution[导入功能下线]
+   如果您的版本提示这个公共，请参考[小米课程表恢复](https://www.bilibili.com/video/BV1zkaEzEEK5/)输入神秘代码来解决
+   `window.location.hash ='/import'`
+   :::
+    
+3. **进入教务系统**
+   - 根据文本提示进入导入**个人课表页面**
+   :::danger[进入正确的页面！]
+    - 教务系统的初始密码是**完整身份证号**
+    - 请进入**个人课表页面**之后才执行导入
+   ::: 
+
+4. **后续设置**
+   - 根据提示，选择正确的周数和学期
+   - 前往设置添加小组件到桌面
+   - **Enjoy it!**
+
+</Steps>

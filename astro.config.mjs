@@ -21,7 +21,7 @@ export default defineConfig({
     starlight({
       title: "NJUPT-NAVI",
       plugins: [starlightScrollToTop(), starlightImageZoom()],
-       customCss: [
+      customCss: [
         // 你的自定义 CSS 文件的相对路径
         '@assets/css/color.css',
       ],
@@ -145,7 +145,31 @@ export default defineConfig({
             {
               label: "实用工具",
               collapsed: true,
-              autogenerate: { directory: "learn/useful_tools" },
+              items: [
+                {
+                  label: "课表",
+                  collapsed: true,
+                  items: [
+                      {
+                      label: "小爱课表",
+
+                      slug:   "learn/useful_tools/curriculum/xiaoai" ,
+                    },
+                    {
+                      label: "kwgt 固定课表",
+
+                      slug:  "learn/useful_tools/curriculum/kwgt" ,
+                    },
+                  
+
+                  ],
+                },
+
+                { label: "PotPlay 播放器", slug: "learn/useful_tools/potplayer" },
+                { label: "Windows 和 Office 激活", slug: "learn/useful_tools/win_acti" },
+
+
+              ]
             },
           ],
         },
@@ -181,10 +205,10 @@ export default defineConfig({
       theme: 'forest',
       autoTheme: true
     }),
-/*     partytown({
-      config: {
-        debug: true
-      }
-    }), // 启用 Partytown 集成 */
+    /*     partytown({
+          config: {
+            debug: true
+          }
+        }), // 启用 Partytown 集成 */
   ],
 });

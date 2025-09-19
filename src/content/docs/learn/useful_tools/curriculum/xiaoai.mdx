@@ -1,0 +1,24 @@
+---
+title : 小爱课表
+description : 使用小爱课表导入课表，可以添加小组件或者和系统联动，补全小程序所缺失的功能。
+---
+import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+import img1 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/1.jpg';
+
+import img3 from '@assets/docs/learn/useful_tools/curriculum/xiaoai/3.jpg';
+
+
+## 为什么需要它？
+`南邮小程序`的微信小程序。但是他存在下面缺点:
+1. 强联网依赖。进入小程序都需要连接互联网，在网络不好的时候无法使用。
+2. 冷启动慢。小程序冷启动时间较长。
+3. 无法和系统其他功能联动，例如：闹钟、AI、待办。
+
+为了解决以上问题，我们需要一个专门的**课表**APP来解决这个问题。本文主要介绍**小爱课表**，如果你是其他的系统，例如**鸿蒙**，可以参考[用 kwgt 固定课表](./kwgt)
+
+## 效果预览
+<div style="display:flex; justify-content:center; align-items:center; gap: 16px; flex-wrap: nowrap;">
+  <img src={img1.src} alt="小爱课表示例 1" style="width: clamp(180px, 40vw, 300px); height: auto; border-radius: 8px;" />
+  <img src={img3.src} alt="小爱课表示例 3" style="width: clamp(180px, 40vw, 300px); height: auto; border-radius: 8px;" />
+</div>

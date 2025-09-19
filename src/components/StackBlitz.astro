@@ -1,10 +1,9 @@
 ---
 const rawHead =
-  import.meta.env.MODE === 'development' ? import.meta.env.HEAD : undefined;
+	import.meta.env.MODE === "development" ? import.meta.env.HEAD : undefined;
 
 // 只接受非空值，否则回退到 'main'
-const HEAD = (rawHead && rawHead.trim()) || 'main';
-
+const HEAD = (rawHead && rawHead.trim()) || "main";
 
 interface Props {
 	/** Name of the directory in `examples/` that contains the code for this example. */
@@ -21,38 +20,81 @@ interface Props {
 	showSidebar?: boolean;
 }
 
-
-const { example, title, description, openFile, clickToLoad, showSidebar } = Astro.props;
+const { example, title, description, openFile, clickToLoad, showSidebar } =
+	Astro.props;
 /* if (!example) {
 	throw new Error('Missing props for `<StackBlitz>` component. `example` is required.');
 } */
 
 const embedUrl = new URL(
-	`https://stackblitz.com/github/NJUPT-NAVI/NJUPT-Survival-Guide/tree/${HEAD}/${example}`
+	`https://stackblitz.com/github/NJUPT-NAVI/NJUPT-Survival-Guide/tree/${HEAD}/${example}`,
 );
-embedUrl.searchParams.set('embed', '1');
+embedUrl.searchParams.set("embed", "1");
 if (Array.isArray(openFile)) {
 	for (const file of openFile) {
-		embedUrl.searchParams.append('file', file);
+		embedUrl.searchParams.append("file", file);
 	}
 } else {
-	embedUrl.searchParams.set('file', openFile);
+	embedUrl.searchParams.set("file", openFile);
 }
-if (clickToLoad) embedUrl.searchParams.set('ctl', '1');
-if (showSidebar) embedUrl.searchParams.set('showSidebar', '1');
-if (description) embedUrl.searchParams.set('description', description);
-if (title) embedUrl.searchParams.set('title', title);
+if (clickToLoad) embedUrl.searchParams.set("ctl", "1");
+if (showSidebar) embedUrl.searchParams.set("showSidebar", "1");
+if (description) embedUrl.searchParams.set("description", description);
+if (title) embedUrl.searchParams.set("title", title);
 ---
 
-<div>
+<div class="stackblitz-container">
 	<iframe
 		class="sb-iframe"
 		src={embedUrl.href}
 		height="300"
 		title={`StackBlitz embedded IDE: ${title}`}></iframe>
+	<button class="fullscreen-btn" title="进入全屏">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<path
+				d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+			></path>
+		</svg>
+	</button>
 </div>
 
 <style>
+	.stackblitz-container {
+		position: relative;
+	}
+
+	.fullscreen-btn {
+		position: absolute;
+		top: calc(2rem + 8px);
+		right: 8px;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.4rem;
+		background-color: var(--sl-color-gray-5);
+		color: var(--sl-color-white);
+		border: 1px solid var(--sl-color-gray-4);
+		border-radius: 0.25rem;
+		cursor: pointer;
+		opacity: 0.7;
+		transition: opacity 0.2s ease-in-out;
+	}
+
+	.stackblitz-container:hover .fullscreen-btn {
+		opacity: 1;
+	}
+
 	.sb-iframe {
 		margin-block: 2rem;
 		border: none;
@@ -61,7 +103,9 @@ if (title) embedUrl.searchParams.set('title', title);
 		width: 100%;
 		--vheight: 100vh;
 		height: min(
-			calc(var(--vheight) - var(--sl-nav-height) - var(--sl-content-pad-x)),
+			calc(
+				var(--vheight) - var(--sl-nav-height) - var(--sl-content-pad-x)
+			),
 			40rem
 		) !important;
 	}
@@ -71,3 +115,24 @@ if (title) embedUrl.searchParams.set('title', title);
 		}
 	}
 </style>
+
+<script>
+	document.querySelectorAll(".stackblitz-container").forEach((container) => {
+		const button = container.querySelector(".fullscreen-btn");
+		const iframe = container.querySelector(".sb-iframe");
+
+		if (button && iframe) {
+			button.addEventListener("click", () => {
+				if (iframe.requestFullscreen) {
+					iframe.requestFullscreen();
+				} else if (iframe.webkitRequestFullscreen) {
+					/* Safari */
+					iframe.webkitRequestFullscreen();
+				} else if (iframe.msRequestFullscreen) {
+					/* IE11 */
+					iframe.msRequestFullscreen();
+				}
+			});
+		}
+	});
+</script>

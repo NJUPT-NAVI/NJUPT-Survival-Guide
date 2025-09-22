@@ -1,0 +1,68 @@
+name: Auto Deploy to Netlify
+
+on:
+  schedule:
+    # 在 UTC 时间 12:11 运行，即北京时间 (UTC+8) 下午 8:11
+    - cron: '25 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: netlify-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy-to-netlify:
+    name: Build & Deploy to Netlify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0 # 获取所有历史记录以便获取 commit 信息
+
+      - name: Get short SHA
+        id: get_sha
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Force push main to deploy branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 将本地的 main 分支状态强制推送到远程的 deploy 分支
+          git push origin HEAD:deploy --force
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建
+        env:
+          CONTRIBUTOR_INFORMATION_TOKEN: ${{ secrets.CONTRIBUTOR_INFORMATION_TOKEN }}
+        run: npm run build
+
+      - name: Netlify 部署
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: ./dist
+          # 建议将 Netlify 的生产分支设置为 deploy
+          production-branch: deploy
+          # 强制进行生产部署
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from main@${{ steps.get_sha.outputs.SHA_SHORT }}"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5

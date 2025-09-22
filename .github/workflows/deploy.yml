@@ -86,22 +86,6 @@ jobs:
         env:
           DEPLOY_REPO_TOKEN: ${{ secrets.DEPLOY_REPO_TOKEN }}
         run: bash scripts/sync-dist.sh dist
-      - name: Netlify 部署
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: ./dist
-          production-branch: main
-          # 总是作为生产部署
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy v${{ needs.release.outputs.version }} (released=${{ needs.release.outputs.released }})"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
       - name: 输出信息
         run: |
           echo "是否产生新版本: ${{ needs.release.outputs.released }}"

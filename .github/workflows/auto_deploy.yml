@@ -2,8 +2,8 @@ name: Auto Deploy to Netlify
 
 on:
   schedule:
-    # 在 UTC 时间 12:11 运行，即北京时间 19:30
-    - cron: '30 11 * * *'
+    # 即北京时间 06：00
+    - cron: '0 22 * * *'
   workflow_dispatch:
 
 permissions:

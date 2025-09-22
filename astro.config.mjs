@@ -4,6 +4,7 @@ import mermaid from 'astro-mermaid';
 import { defineConfig } from "astro/config";
 import starlightImageZoom from 'starlight-image-zoom';
 import starlightScrollToTop from 'starlight-scroll-to-top';
+import starlightDocSearch from '@astrojs/starlight-docsearch';
 //import partytown from '@astrojs/partytown';
 
 
@@ -20,7 +21,13 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "NJUPT-NAVI",
-      plugins: [starlightScrollToTop(), starlightImageZoom()],
+      plugins: [
+        starlightScrollToTop(),
+        starlightImageZoom(),
+        starlightDocSearch({
+          clientOptionsModule: './src/config/docsearch.ts',
+        }),
+      ],
       customCss: [
         // 你的自定义 CSS 文件的相对路径
         '@assets/css/color.css',
@@ -121,7 +128,7 @@ export default defineConfig({
               items: [
                 {
                   label: "AI",
-                  
+
                   autogenerate: { directory: "learn/AI" },
                 },
                 {

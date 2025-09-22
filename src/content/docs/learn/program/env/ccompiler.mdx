@@ -1,0 +1,186 @@
+---
+title: C/C++ 开发环境
+description: 本文介绍了C/C++编译器的基本概念，并详细介绍在不同系统上安装C/C++译器的方法。用于给小白用户提供一个清晰的安装 C/C++ 开发环境的指导。
+---
+
+import { Steps , Badge  } from '@astrojs/starlight/components';
+
+### C/C++ 编译器是什么
+是把 `C/C++`编译为机器能够直接执行的可执行程序的工具。
+
+> 如果对编译器本身感兴趣，参考[维基百科](https://en.wikipedia.org/wiki/Compiler)
+
+这里这介绍课本上经典的编译过程 （也是**考试**考查的） 
+
+<Steps>
+1. 预处理 （预处理器）
+2. 编译 （编译器）
+3. 汇编 （汇编器）
+4. 链接 （链接器）
+</Steps>
+
+实际上在我们口中所谓的 `编译器` 就是把上面四个整合在一起的**完整编译器**。
+
+### 常见的 C/C++ 编译器
+- GCC (GNU Compiler Collection) 
+- Clang (LLVM)
+- MSVC (Microsoft Visual C++)
+- Tiny C Compiler (TCC)
+- PCC (Portable C Compiler)
+- Intel C Compiler (ICC)
+
+
+`GCC` 、`Clang` 是我们在 `Linux` 和 `macOS` 上最常用的编译器。`MSVC` 是 Windows 上最常用的编译器，当然 `GCC` 和 `Clang` 也可以在 Windows 上使用。
+
+### 编译器不是什么
+大多数初学者会认为`VSCode`、`VS 2022`、`CLion`、`Dev C++`等 IDE 就是编译器，实际上他们只是普通的**文本编辑器**而已，这一点在`VSCode`中尤为明显，其中给你代码补全功能的也不是编译器，而是 `LSP` 服务器例如 `clangd`、`ccls` 等等。
+
+`VS 2022`、`Dev C++` 等专门为 `C/C++` 设计的 IDE 集成了 `C/C++` 编译器，所以你可以开箱即用，但是他们本质上还是文本编辑器。而`VSCode`则需要你手动安装编译器。
+
+**编译器** + **IDE** = **开发环境**
+
+### 在不同系统上安装 C 语言编译器
+
+> 将会按照安装难度从易到难介绍，⚡越多表示安装**难度越大**。
+> 
+> 体验指数 和 推荐指数 将会在下文给出，⭐越多表示**体验越好**。
+
+### Windows
+
+
+---
+
+#### `Dev C++` 5.1
+
+**安装难度：** 0 （我奶奶都会装）
+
+**体验指数：**⭐
+
+**推荐指数：**⭐⭐
+
+
+这是一个非常老牌的 `C/C++` IDE，开箱即用，没有任何复杂的插件和操作，集成了 `GCC` 编译器，也是`蓝桥杯` `转专业考试` 等指定的 `IDE` + `编译器` 环境。
+
+
+##### 安装
+这里推荐`Dev C++` 5.1版本， 推荐教程为
+[知乎 - Dev C++下载安装使用教程](https://zhuanlan.zhihu.com/p/1893012627262788086)
+
+---
+
+#### VS studio 2022
+
+**安装难度：**⚡⚡
+
+**体验指数：**⭐⭐⭐
+
+**推荐指数：**⭐⭐⭐
+
+
+`VS studio 2022` 是微软官方的 `IDE`，集成了 `MSVC` 编译器，功能强大，不仅仅 `C/C++` 还可以胜任 `C#`、`Python`、`Fluent UI` `.NET` ... 等等**几乎任何**和 `Windows` 相关的开发。也是你去B站搜各种 `C/C++` 教程看到的最多的 `IDE`。
+
+对**多线程调试**的支持非常完整，市面上在`C/C++多线程调试`方面没有任何 `IDE` 能够超越 `VS studio`。
+
+
+> 只有社区版是免费的，但是个人使用足够了。
+
+推荐教程为 [C语言/C++初学——Visual Studio环境的安装配置与使用](https://zhuanlan.zhihu.com/p/71110525)
+
+:::tip[下载提示]
+如果你安装过程的下载缓慢，可能需要科学上网。
+:::
+
+#### VSCode + `GCC` / `Clang` / `MSVC`
+**安装难度：** ⚡⚡⚡⚡
+
+**体验指数：** ⭐⭐⭐⭐
+
+**推荐指数：** ⭐⭐⭐⭐⭐
+
+`VSCode` 是微软官方的轻量级 `IDE`，通过安装插件可以支持几乎所有的编程语言。`C/C++` 方面推荐安装 `C/C++` **LSP**插件（微软官方）或者 `clangd` 插件（第三方）。但是 `VSCode` 本身并不集成任何编译器，所以你需要手动安装 `GCC` / `Clang` / `MSVC` 编译器。
+
+:::caution[小白警告]
+如果您选择这个方案，请确保你了解下面知识：
+- 什么是[环境变量](https://blog.csdn.net/weixin_65032328/article/details/136580118)，环境变量如何配置。
+- [IDE 和 编译器不是什么](#编译器不是什么)
+- 有一定的搜索和解决问题的能力。
+:::
+
+这里推荐的教程为[VS Code 配置 C/C++ 编程运行环境](https://blog.csdn.net/qq_42417071/article/details/137438374)
+
+:::note[其他编译器]
+这个教程中指导安装的编译器为 `MinGW-w64`，它是 `GCC` 的一个 Windows 版本。如果你想安装 `Clang` 可以参考这个教程[windows上配置llvm+clang环境](https://blog.csdn.net/weixin_41080308/article/details/144536540)
+:::
+
+#### VSCode + WSL + `GCC` / `Clang`
+
+**安装难度：** ⚡⚡⚡⚡⚡
+
+**体验指数：** ⭐⭐⭐⭐⭐⭐
+
+**推荐指数：** ⭐⭐⭐
+
+###### WSL
+`WSL` 是微软官方的 `Linux` 子系统，可以让你在 `Windows` 上运行 `Linux` 系统。通过 `WSL2` 你可以在 `Windows` 上使用 `Linux` 的各种工具和软件，甚至包括各种图形化界面，使用体验简直就和直接使用原生 `Linux` 几乎没有区别。
+
+这个方案 ，既可以让你享受`VScode` 强大插件生态，还可以让你和`Windows` **文件管理**和**工作流无缝衔接**，又可以让你使用 `Linux` 上的各种工具和软件，简直是 `C/C++` 开发的**终极方案**, 效率神器。
+
+
+本方案安装过程较为复杂，对于`WSL`的安装，或许会单独开一个篇章来介绍。TODO
+这里先推荐几个个教程:
+- [知乎 - 史上最全的WSL安装教程](https://zhuanlan.zhihu.com/p/386590591)
+- [清华电系科协](https://docs.eesast.com/docs/tools/wsl)
+
+如何在`WSL` 上安装 `GCC` / `Clang` 请参考下面的 [Linux](#linux) 章节。
+
+### Linux 
+
+> 本章节仍然在维护中 TODO
+>
+> 本章节的难度是默认你已经安装并了解过简单的 `Linux` 命令
+
+#### 我需要在 `Linux` 上开发 `C/C++` 吗？
+
+
+下面几种情况我**推荐**你在 `Linux` 上开发 `C/C++` 代码：
+-  `Linux` 用户
+- 需要开发具有较多第三方库的 `C/C++` 复杂项目
+- 能够自己探索和解决问题
+
+下面几种情况我**不推荐**你在 `Linux` 上开发：
+- 希望 **开箱即用** `C/C++`环境，但却没有任何现成的`Linux`系统
+- 只是希望学习 `C/C++` **应试语法**
+- 没有任何使用**命令行操控系统**的经验，并且不希望学习
+
+#### Ubuntu / Debian
+
+> TODO
+
+
+##### VScode + `GCC` /  `Clang`
+###### 通过 APT 安装 `GCC` /  `Clang`
+
+:::note[软件源]
+如果你在国内，建议更换为国内的软件源，否则需要科学上网，这里推荐[清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
+
+详细的换源**视频教程**，请参考[ubuntu换清华源](https://www.bilibili.com/video/BV1isTQzkEns/)
+:::
+
+```bash
+sudo apt update
+sudo apt install build-essential   # 安装GCC和G++
+sudo apt install clang lldb lld llvm            # 安装Clang + LLVM
+```
+
+###### 如何安装 `VSCode`
+
+这里推荐教程[VSCode Linux 安装](https://www.runoob.com/vscode/vscode-linux-install.html)
+
+#### 编译安装
+TODO
+##### 为什么需要编译安装
+TODO
+##### GCC
+TODO
+##### LLVM
+TODO

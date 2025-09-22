@@ -121,12 +121,17 @@ export default defineConfig({
               items: [
                 {
                   label: "AI",
-
+                  
                   autogenerate: { directory: "learn/AI" },
                 },
                 {
-                  label: "C 语言",
+                  label: "开发环境",
 
+                  autogenerate: { directory: "learn/program/env/" },
+                },
+                {
+                  label: "C 语言",
+                  collapsed: true,
                   autogenerate: { directory: "learn/program/c/" },
                 },
 
@@ -150,17 +155,17 @@ export default defineConfig({
                   label: "课表",
                   collapsed: true,
                   items: [
-                      {
+                    {
                       label: "小爱课表",
 
-                      slug:   "learn/useful_tools/curriculum/xiaoai" ,
+                      slug: "learn/useful_tools/curriculum/xiaoai",
                     },
                     {
                       label: "kwgt 固定课表",
 
-                      slug:  "learn/useful_tools/curriculum/kwgt" ,
+                      slug: "learn/useful_tools/curriculum/kwgt",
                     },
-                  
+
 
                   ],
                 },

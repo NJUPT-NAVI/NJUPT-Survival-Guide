@@ -98,6 +98,17 @@ export default defineConfig({
               autogenerate: { directory: "life/network" },
             },
             {
+              label: "校园活动",
+              collapsed: true,
+              items: [
+                {
+                  label: "晨跑", items: [
+                    { label: "仙林校区", slug: "life/even/morning_jog/xianlin" },
+                  ]
+                },
+              ],
+            },
+            {
               label: "快递相关",
               collapsed: true,
               autogenerate: { directory: "life/express" }
@@ -113,9 +124,23 @@ export default defineConfig({
               autogenerate: { directory: "life/transportation/" },
             },
             {
-              label: "学校周边设施",
+              label: "学校设施",
               collapsed: true,
-              autogenerate: { directory: "life/aroundschool" },
+              //autogenerate: { directory: "life/aroundschool" },
+              items: [
+                { label: "学生事务中心", slug: "life/aroundschool/service_center" },
+                // 将 campus_introduction 这个目录作为一个组，并改中文标题
+                { label: "仙林校区周边设施", slug: "life/aroundschool/xianlin" },
+
+
+                {
+                  label: "学校服务",
+                  collapsed: true,
+                  autogenerate: { directory: "life/aroundschool/service" },
+                },
+
+
+              ],
             },
           ],
         },

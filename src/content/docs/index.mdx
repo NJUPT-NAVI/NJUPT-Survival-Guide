@@ -20,6 +20,24 @@ hero:
       variant: secondary
 ---
 
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+
+
+<CardGrid>
+    <Card title="新生篇" icon="rocket">
+        从入学报到、校区介绍到交通指南，帮助你顺利开启大学生活
+    </Card>
+    <Card title="生活篇" icon="homebrew">
+        涵盖校园网、食堂、快递、校园活动等日常生活的方方面面
+    </Card>
+    <Card title="学习篇" icon="sun">
+        提供课程资料、考试攻略、实用工具和技能学习指南
+    </Card>
+    <Card title="贡献指南" icon="vim">
+        了解如何参与项目，与我们一起共建更完善的南邮生存指南
+    </Card>
+</CardGrid>
 {/*
 1. 删除
 尝试删除上面的内容中 template: splash下一行首开始 ，--- 这一行之前的所有内容

@@ -40,3 +40,11 @@
 	--sl-color-gray-7: #f3f7f9;
 	--sl-color-black: #ffffff;
 }
+
+
+
+@media (min-width: 50rem) {
+  .mobile-only {
+    display: none;
+  }
+}

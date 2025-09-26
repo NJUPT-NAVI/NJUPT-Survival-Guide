@@ -3,46 +3,54 @@ title: 欢迎小柚子们
 description: 新生入学南京邮电大学，欢迎加入小柚子大家庭！
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
-import ThemedImage from '@components/ThemedImage.astro';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-{/*
-## 报道流程
-<LinkCard
-  title="具体流程"
-  href="/freshman/checkin"
-/>
-*/}
+<div class="mobile-only">
 
-## 校区介绍
-<LinkCard
-  title="仙林校区"
-  href="/freshman/campus_introduction/xianlin"
-  description="南京亚东新城区文苑路 9 号（邮编 210023）"
-/>
+:::tip[浏览提示]
+手机用户请点击左上角的 **☰ 菜单按钮** 以展开完整的网站目录。
+:::
 
+</div>
 
-<LinkCard
-  title="三牌楼校区"
-  href="/freshman/campus_introduction/sanpailou"
-  description="南京新模范马路 66 号（邮编 210003）"
-/>
+## 快速开始
 
-<LinkCard
-  title="锁金村校区"
-  href="/freshman/campus_introduction/suojincun"
-  description="南京新模范马路 66 号（邮编 210003）"
-/>
+<CardGrid>
+    <Card title="我是新生" icon="sun">
+        从 [新生篇](/freshman/welcome) 开始，了解报到、校区、交通等一切。
+    </Card>
+    <Card title="开始探索" icon="open-book">
+        直接进入 [指南目录](#内容导航)，自由探索学习、生活等各方面信息。
+    </Card>
+</CardGrid>
 
-<LinkCard
-  title="联络交通"
-  href="/freshman/contact"
-  description="联系方式和交通方式"
-/>
+---
 
-## 小团体！？
-<LinkCard
-  title="各种群组合集"
-  href="/learn/yellow_pages/dir"
-  description="联系方式和交通方式"
-/>
+## 内容导航
+
+### 🧭 新生篇
+
+<CardGrid>
+    <LinkCard title="新生报到" href="/freshman/checkin" />
+    <LinkCard title="校区导航" href="/freshman/campus_introduction/xianlin" />
+    <LinkCard title="联络交通" href="/freshman/contact" />
+    <LinkCard title="默认密码汇总" href="/freshman/njupt_default_psw" />
+</CardGrid>
+
+### 🏝️ 生活篇
+
+<CardGrid>
+    <LinkCard title="校园网" href="/life/network/info/" />
+    <LinkCard title="校园活动" href="/life/even/morning_jog/xianlin" />
+    <LinkCard title="快递" href="/life/express/express_info_xl" />
+    <LinkCard title="学校设施" href="/life/aroundschool/service_center" />
+</CardGrid>
+
+### 📚 学习篇
+
+<CardGrid>
+    <LinkCard title="编程语言" href="/learn/program/env/wsl2" />
+    <LinkCard title="考试相关" href="/learn/exams/cet" />
+    <LinkCard title="图书馆" href="/learn/library/search" />
+    <LinkCard title="实用工具" href="/learn/useful_tools/potplayer" />
+</CardGrid>

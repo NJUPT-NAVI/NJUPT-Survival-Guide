@@ -45,7 +45,7 @@ export default defineConfig({
         {
           icon: "comment",
           label: "Group",
-          href: "https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide",
+          href: "https://qm.qq.com/q/FmUTUm6osG",
         },
       ],
 
@@ -237,6 +237,7 @@ export default defineConfig({
       components: {
         Pagination: "@components/Pagination.astro",
         Head: "@components/Head.astro", // 全局替换 Head
+        EditLink: './src/components/Editor.astro',
       },
     }),
     mermaid({

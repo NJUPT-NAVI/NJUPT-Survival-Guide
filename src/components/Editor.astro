@@ -1,0 +1,34 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+
+// --- 配置 ---
+const GITHUB_REPO = 'NJUPT-NAVI/NJUPT-Survival-Guide';
+const GITHUB_BRANCH = 'main';
+
+// --- 路径计算 ---
+// 从 Astro 的全局变量中获取当前页面的内容条目(entry)
+const { entry } = Astro.locals.starlightRoute;
+
+// 使用 entry.filePath，它包含了从 `src/content/docs/` 开始的完整相对路径，包括文件扩展名
+// 例如: 'freshman/welcome.mdx' 或 'guides/introduction.md'
+const editUrl = `https://github.com/${GITHUB_REPO}/edit/${GITHUB_BRANCH}/${entry.filePath}`;
+---
+
+<a href={editUrl} target="_blank" rel="noopener noreferrer" class="edit-link sl-flex">
+    <Icon name="pencil" size="1.2em" />
+    <span>在 GitHub 上编辑此页</span>
+</a>
+
+<style>
+    .edit-link {
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--sl-color-gray-3);
+        text-decoration: none;
+        font-size: var(--sl-text-sm);
+        transition: color 0.15s ease-in-out;
+    }
+    .edit-link:hover {
+        color: var(--sl-color-white);
+    }
+</style>

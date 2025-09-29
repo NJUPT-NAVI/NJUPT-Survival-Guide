@@ -1,0 +1,44 @@
+---
+title: 系统相关
+description: 多系统和虚拟机相关
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## 关于双系统(多系统)和虚拟机相关
+
+或因为课程, 或因为兴趣, 你可能需要安装双系统或者虚拟机. 本章节提供一些关于安装虚拟机的帮助
+
+### Linux虚拟机
+
+在windows下安装Linux虚拟机有多种选择, 并不是任何时候你都需要一个*完整*的虚拟机, 请**根据需求选择**
+
+> 如果你只是用来学习 C 语言开发, 做一些不需要进行隔离, 且没有危险性的项目, 那么推荐使用WSL.
+> 
+> 如果你需要研究完整的 Linux , 尝试 Linux 桌面, 或者进行有危险性的实验, 那么建议安装完整的虚拟机
+
+- WSL
+
+WSL是基于[`HyperV`](https://en.wikipedia.org/wiki/Hyper-V) 的虚拟机, 和 Windows 系统有良好的相性, 相当简单方便. 
+[WSL 的安装教程](https://zhuanlan.zhihu.com/p/386590591)
+
+- VirtualBox
+
+笔者推荐使用 VirtualBox 安装完整的虚拟机. 因为与 VMWare 相比不容易出现故障
+
+可以阅读[教程](https://zhuanlan.zhihu.com/p/111567471)完成安装.
+
+<Aside type="caution">
+请务必在一开始的时候选择 **英语** 进行安装. 防止 `/home` 目录下的各个目录是中文的, 这会在使用过程中造成一些困扰.
+</Aside>
+
+- VMWare
+
+VMWare 也是使用广泛的虚拟机软件. 具体可以参考[这篇](https://zhuanlan.zhihu.com/p/693769007)
+
+### MacOS虚拟机 
+
+如果有需求需要在 MacOS 下做实验/适配, 可以使用 MacOS 虚拟机. MacOS 的安装条件比较苛刻, 笔者假设阅读本章节的读者有安装
+Linux 虚拟机的能力.
+
+可以参考 [前辈的博客](https://feipiao594.github.io/posts/ebefb94c.html)

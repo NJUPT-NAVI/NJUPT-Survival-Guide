@@ -147,6 +147,11 @@ export default defineConfig({
         {
           label: "学习篇",
           items: [
+              {
+                  label: "电脑相关",
+                  collapsed: true,
+                  autogenerate: {directory: "learn/computer/"},
+              },
             {
               label: "编程语言",
               collapsed: true,

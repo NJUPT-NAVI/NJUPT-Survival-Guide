@@ -1,9 +1,9 @@
 import type { DocSearchClientOptions } from '@astrojs/starlight-docsearch';
 
 export default {
-  appId: 'A52L3ZTDEC',
-  apiKey: '3d30e0821df3f2e8a35dc8d3f7ec965e',
-  indexName: '南京邮电大学生存手册',
+  appId: 'INP420CW5B',
+  apiKey: 'c4632fb71dffedfe2c86bb4692e9f80e',
+  indexName: '南邮手册vercal',
   getMissingResultsUrl({ query }) {
     return `https://github.com/algolia/docsearch/issues/new?title=${query}`;
   },

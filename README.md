@@ -1,5 +1,5 @@
-<a href="https://njuptnavi.top/" target="_blank" rel="noopener noreferrer">
-  <img src="https://njuptnavi.top/_astro/NAVI.BMPlSeam_Z1QH86j.webp" width="300" height="304" alt="NapCat" align="right" />
+<a href="https://www.njuptnavi.top/" target="_blank" rel="noopener noreferrer">
+  <img src="https://www.njuptnavi.top/_astro/NAVI.BMPlSeam_Z1QH86j.webp" width="300" height="304" alt="NapCat" align="right" />
 </a>
 <div align="center">
 
@@ -37,11 +37,11 @@ npm run preview
 
 
 ## 链接
-| 网站 | [![Github.IO](https://img.shields.io/badge/WebSite-Netlify-orange)](https://njuptnavi.top/) | [![Cloudflare.Worker](https://img.shields.io/badge/WebSite-Github%20Pages-green)](https://njupt-navi.github.io/) 
-|:-:|:-:|:-:|
+| 网站  | [![Github.IO](https://img.shields.io/badge/WebSite-Netlify-orange)](https://www.njuptnavi.top/) | [![Cloudflare.Worker](https://img.shields.io/badge/WebSite-Github%20Pages-green)](https://njupt-navi.github.io/) |
+| :---: | :---------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------: |
 
-| 群组 | [![GROUP](https://img.shields.io/badge/QQ%20Group-Join-blue)](https://qm.qq.com/q/2AVthOUvfy) 
-|:-:|:-:|
+| 群组  | [![GROUP](https://img.shields.io/badge/QQ%20Group-Join-blue)](https://qm.qq.com/q/2AVthOUvfy) |
+| :---: | :-------------------------------------------------------------------------------------------: |
 
 ## 为本项目做贡献
 请参考[如何为本项目贡献](https://njupt-navi.github.io/contribution/contribution/)

@@ -1,0 +1,7 @@
+# Algolia-Crawler-Verif: 36596E9F51D665A6
+
+User-agent: *
+Allow: /
+
+
+Sitemap: https://www.njuptnavi.top/sitemap-index.xml

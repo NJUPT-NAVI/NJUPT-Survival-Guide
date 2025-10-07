@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.30.0...v1.31.0) (2025-10-07)
+
+
+### Features
+
+* **Learn:** add new file for 体育篇 ([81aa0e5](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/81aa0e5cd30f87b7ec640d68e69f16cb37ae43a2))
+
 # [1.30.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.29.1...v1.30.0) (2025-10-03)
 
 

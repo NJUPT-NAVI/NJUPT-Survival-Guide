@@ -185,6 +185,11 @@ export default defineConfig({
               autogenerate: { directory: "learn/library" },
             },
             {
+              label: "体育篇",
+              collapsed: true,
+              autogenerate: { directory: "learn/fitness/" },
+            },
+            {
               label: "实用工具",
               collapsed: true,
               items: [

@@ -224,6 +224,11 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: "learn/scientific-research" },
             },
+            {
+              label: "专业相关",
+              collapsed: true,
+              autogenerate: { directory: "learn/majors" },
+            },
           ],
         },
 

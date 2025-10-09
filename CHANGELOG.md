@@ -1,3 +1,11 @@
+# [1.32.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.31.0...v1.32.0) (2025-10-09)
+
+
+### Features
+
+* **Learn:** 增加转专业介绍 ([29691b3](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/29691b3d91b5d6f8038c134ccffc8e83fa6a1216))
+* **Life:** 增加更多项目介绍 ([3a06821](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/3a068217bfff4518ed476dbd3f2b5b98b232ef13))
+
 # [1.31.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.30.0...v1.31.0) (2025-10-07)
 
 

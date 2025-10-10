@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.32.0...v1.33.0) (2025-10-10)
+
+
+### Features
+
+* add more ai tool && update stfw ([a168da7](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/a168da75c66d20f9ec13bbc3ebf930ca50e837fe))
+
 # [1.32.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.31.0...v1.32.0) (2025-10-09)
 
 

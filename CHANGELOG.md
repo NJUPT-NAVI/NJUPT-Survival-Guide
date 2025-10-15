@@ -1,3 +1,10 @@
+## [1.33.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.33.0...v1.33.1) (2025-10-15)
+
+
+### Bug Fixes
+
+* 新增路由器安装文章，修复部分错误超链接 ([9d17915](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/9d17915d90172ab1ea075e558fe5cac05d7711f9))
+
 # [1.33.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.32.0...v1.33.0) (2025-10-10)
 
 

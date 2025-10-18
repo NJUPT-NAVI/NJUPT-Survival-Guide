@@ -175,6 +175,20 @@ export default defineConfig({
               ],
             },
             {
+              label: "课程相关",
+              collapsed: true,
+              items:[
+
+                { label: "课内课程", autogenerate:{ directory: "learn/courses/inside_courses"}},
+                { label: "课外课程", autogenerate:{ directory: "learn/courses/extracurricular_courses"}}
+
+
+
+
+
+              ]
+            },
+            {
               label: "考试相关",
               collapsed: true,
               autogenerate: { directory: "learn/exams" }
@@ -229,8 +243,26 @@ export default defineConfig({
               collapsed: true,
               autogenerate: { directory: "learn/majors" },
             },
+            {
+              label: "黄页",
+              collapsed: true,
+              autogenerate: { directory: "learn/yellow_pages" },
+            }
           ],
         },
+
+        {
+          label: "娱乐篇",
+          collapsed: true,
+          items:[
+            {
+              label: "黄页",
+              collapsed: true,
+              autogenerate: { directory: "entertainment/yellow_pages" },
+            },
+          ]
+        },
+     
 
         /* {
 

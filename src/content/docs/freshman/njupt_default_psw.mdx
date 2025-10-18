@@ -19,6 +19,7 @@ import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 | 教务系统 | 学号 | 身份证号全部位数  | 与智慧校园密码不同，可单独修改 |
 | 雨课堂（长江雨课堂） | 学号 | NJUPT + 学号后 6 位  | 需先绑定学校身份 |
 | 财务处校园卡圈存 | 无 | 身份证后六位  | 充电费需要用到 |
+| 智慧课堂小程序密码 | 学号 | njupt + 学号（首字母大写）  | 用于智慧课堂小程序 |
 
 ## 使用建议
 
@@ -105,6 +106,12 @@ import { Aside, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
   - 密码：身份证后六位  
   - 圈存用途：校园网、充电费等  
 
+  </TabItem>
+
+  <TabItem label="智慧课堂小程序">
+
+  - 默认密码：`njupt` + 学号（首字母大写）  
+  
   </TabItem>
 
 

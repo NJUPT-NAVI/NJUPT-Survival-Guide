@@ -27,5 +27,8 @@
   "docsearch.noResultsScreen.noResultsText": "No results for",
   "docsearch.noResultsScreen.suggestedQueryText": "Try searching for",
   "docsearch.noResultsScreen.reportMissingResultsText": "Believe this query should return results?",
-  "docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know."
+  "docsearch.noResultsScreen.reportMissingResultsLinkText": "Let us know.",
+  "tableOfContents.onThisPage": "本页内容",
+  "tableOfContents.overview": "概述",
+  "search.label": "搜索"
 }

@@ -21,6 +21,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "NJUPT-NAVI",
+      lastUpdated: true,
       plugins: [
         starlightScrollToTop(),
         starlightImageZoom(),
@@ -294,6 +295,7 @@ export default defineConfig({
         Pagination: "@components/Pagination.astro",
         Head: "@components/Head.astro", // 全局替换 Head
         EditLink: './src/components/Editor.astro',
+        LastUpdated: './src/components/LastUpdated.astro', // 替换 LastUpdated，改中文格式的日期表示
       },
     }),
     mermaid({

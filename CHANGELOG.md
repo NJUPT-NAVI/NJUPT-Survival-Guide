@@ -1,3 +1,10 @@
+# [1.34.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.33.1...v1.34.0) (2025-10-24)
+
+
+### Features
+
+* **Life:** 更新快递取件流程，增加最后更新时间显示并重写为中文日期表述 ([#99](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/99)) ([8ed23d0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/8ed23d0c7547525eb3d5ebfbc0225a114b6bb97b))
+
 ## [1.33.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.33.0...v1.33.1) (2025-10-15)
 
 

@@ -1,0 +1,169 @@
+---
+title: WSL指南
+description: 关于使用WSL的指南
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+这个页面会有疏漏或不完善之处，欢迎大家提出建议和补充
+</Aside>
+
+## 为什么使用WSL？
+
+比起双系统或者完整虚拟机，WSL安装更加方便，并且能够直接访问Windows文件。
+
+## 安装
+
+如果你是Windows 11的操作系统，WSL就已经内置在系统当中了。Windows 10 Build 19041 及以上版本也内置WSL。
+
+如果你的系统比较老，那么可以参考[微软的文档](https://learn.microsoft.com/en-us/windows/wsl/install-manual)。其中也提及了启用虚拟化的方法。
+
+wsl有1和2两个版本，这里建议使用wsl2的版本，打开powershell，使用如下命令可以将默认的wsl版本设置为2：
+
+```powershell
+wsl --set-default-version 2
+```
+
+输入以下命令查看可用的Linux发行版：
+
+```powershell
+wsl --list --online
+```
+
+输入以下命令安装你想要的Linux发行版：
+
+```powershell
+wsl --install
+```
+
+默认情况下，安装的是最新版本的Ubuntu系统。
+
+如果想要指定安装其他发行版，可以`-d`选项，使用`--location`设置安装发行版的路径，至于更多选项，可以使用以下命令查看：
+
+```powershell
+wsl --help
+```
+
+作为示范，此处选择了安装Ubuntu 24.04 LTS，原因是学校大多数课程使用Ubuntu作为实验环境。
+
+```powershell
+wsl --install -d Ubuntu-24.04 --location D:\WSL\Ubuntu\
+```
+
+在下载完毕后，你可以看到如下内容：
+
+![Ubuntu安装完成后的内容](@assets/docs/learn/computer/wsl_ubuntu_download.png)
+
+你需要输入一个新的Linux用户名和密码，之后就可以进入Linux系统了。
+
+## 初步设置
+
+为了打开你刚才安装的Linux发行版，你需要重新启动PowerShell（准确来说是Windows Terminal），然后你就可以在下拉菜单上看见刚才安装的Linux发行版了。
+
+![在下拉菜单中找到刚才安装的发行版](@assets/docs/learn/computer/wsl_start.png)
+
+在进入系统后，推荐给root设置密码：
+
+```bash
+sudo passwd root
+```
+
+wsl默认会将Windows的环境变量导入到Linux系统中，我强烈推荐你关闭这个功能，因为WSL2对Windows文件系统的访问速度非常慢，导致命令在查询时，速度会非常慢。你可以通过编辑`/etc/wsl.conf`文件来关闭这个功能，在文件中添加以下内容：
+
+```ini
+[interop]
+appendWindowsPath = false
+```
+
+wsl会自动将windows的盘符挂载到`/mnt`目录下，例如C盘会挂载到`/mnt/c`目录下。如果你不想挂载（这样也不能访问windows中的文件了），可以在`/etc/wsl.conf`文件中添加以下内容：
+
+```ini
+[automount]
+enabled = false
+```
+
+如果你希望在wsl能够使用你在Windows上的代理，你需要在Windows系统中的`%USERPROFILE%\.wslconfig`文件中添加以下内容：
+
+```ini
+[wsl2]
+networkingMode = mirrored
+```
+
+注意`[wsl2]`如果已经存在，只需要在下面添加`networkingMode = mirrored`即可。
+
+上述内容需要你重新启动`wsl`才能生效，使用如下命令关闭wsl：
+
+```powershell
+wsl --shutdown
+```
+
+注意，关闭wsl也会关闭所有正在运行的wsl中的Linux发行版。此外，如果你更变Windows中的系统代理，也需要重新启动wsl才能生效。
+
+你可能发现在Ubuntu中使用`apt`命令时下载速度极慢，这时你需要更换镜像源，你需要编辑`/etc/apt/sources.list.d/ubuntu.sources`文件。详细编译内容，可以参考清华大学开源软件镜像站给出的[Ubuntu镜像源配置](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)，按照`DEB822 格式`配置。
+
+注意，**在编辑前请一定要备份**，使用：
+
+```bash
+sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
+```
+
+配置完成后，使用以下命令更新apt缓存：
+
+```bash
+sudo apt update
+```
+
+这个命令不仅可以帮助你启用新的镜像源，还能够帮助你获取最新的软件包的列表。
+
+对于其他的发行版，可以自行上网查询。
+
+## 常见问题
+
+### 关闭wsl时的问题
+
+如果你一直使用`wsl --shutdown`命令关闭wsl，而不先关闭正在运行的Linux发行版，可能会导致某些系统进程反复启动但从不关闭的问题。这不会有太大影响，但最好还是先关闭Linux发行版再关闭wsl。
+
+关闭系统可以使用`sudo systemctl poweroff`命令。关闭窗口不会关闭系统，原因是Windows Terminal只是使用ssh连接到wsl中的Linux发行版，关闭窗口相当于断开连接。
+
+### 在wsl中使用图形化界面
+
+为了在wsl中使用图形化界面，你需要用到[wslg](https://github.com/microsoft/wslg)，wslg一般是伴随着wsl一起安装的。如果没有安装，可以参考[微软的文档](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)。
+
+你需要手动设置启动图形化界面支持，在Windows系统中的`%USERPROFILE%\.wslconfig`文件中添加以下内容：
+
+```ini
+[wsl2]
+guiApplications=true
+```
+
+这个图形化界面的bug还是非常多的，首先中文的显示问题比较大，而且有较大的性能问题，所以不建议过分依赖图形化界面。
+
+### /var/log/syslog文件过大
+
+wslg确实会存在问题，有时会不断地往`/var/log/syslog`中写入大量内容，间隔时间是毫秒级别的，这导致日志文件很容易就达到数GB的大小，虽然日志文件会定期清理，但这样还是会非常占据磁盘空间，而且影响日志查看。
+
+笔者由于更换过系统，已经无法复现这个问题了，如果你遇到了这个情况，欢迎在此处写下具体日志内容与解决方案。
+
+### 在wsl中使用VSCode
+
+VSCode是特别支持wsl的，在正常情况下，可以使用`code`命令来让Windows中的VSCode远程连接到wsl中的Linux发行版，在连接前，你需要首先在Windows环境下下载了VSCode，然后会自动给你下载插件，接着就可以使用了。
+
+不过需要注意的是，由于在之前已经把Windows中的PATH从Linux的PATH中剔除了，所以`code`命令无法使用。解决方法很简单，所谓的`code`，其实是VSCode安装时，同时安装的一个bash脚本。如果你的VSCode下载在`D:\path\to\VSCode`目录下，那么`code`脚本就位于`D:\path\to\VSCode\bin`中，你只需要选择一个目录（一般是你的Linux环境中PATH中的某个目录），然后创建一个软链接指向`code`脚本即可。例如：
+
+```bash
+ln -s /mnt/d/path/to/VSCode/bin/code /usr/local/bin/code
+```
+
+### 无法在wsl中运行Windows的exe文件
+
+wsl中的Linux发行版是允许运行Windows的exe文件的，但往往会出现无法运行的情况。你可以参考这个issue中给出的[解决方案](https://github.com/microsoft/WSL/issues/8952#issuecomment-1568212651)。
+
+我也把要执行的bash命令放在这里：
+
+```bash
+sudo sh -c 'echo :WSLInterop:M::MZ::/init:PF > /usr/lib/binfmt.d/WSLInterop.conf'
+sudo systemctl restart systemd-binfmt
+```
+
+为什么要运行exe文件？例如在neovim中，你可能会启用系统剪切板，为了让剪贴板的内容与Windows系统的剪贴板内容互通，你可能会使用`clip.exe`，这种情况下，你需要运行exe文件。

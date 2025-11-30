@@ -6,12 +6,12 @@ description: 关于使用WSL的指南
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="note">
-这个页面会有疏漏或不完善之处，欢迎大家提出建议和补充
+这个页面可能会有疏漏或不完善之处，欢迎大家提出建议或补充
 </Aside>
 
 ## 为什么使用WSL？
 
-比起双系统或者完整虚拟机，WSL安装更加方便，并且能够直接访问Windows文件。
+比起双系统或者完整虚拟机，WSL安装更加方便，并且能够方便地互相访问文件。
 
 ## 安装
 
@@ -31,7 +31,7 @@ wsl --set-default-version 2
 wsl --list --online
 ```
 
-输入以下命令安装你想要的Linux发行版：
+输入以下命令安装Linux发行版：
 
 ```powershell
 wsl --install
@@ -55,7 +55,7 @@ wsl --install -d Ubuntu-24.04 --location D:\WSL\Ubuntu\
 
 ![Ubuntu安装完成后的内容](@assets/docs/learn/computer/wsl_ubuntu_download.png)
 
-你需要输入一个新的Linux用户名和密码，之后就可以进入Linux系统了。
+你需要输入一个新的用户名和密码，之后就可以进入Linux系统了。
 
 ## 初步设置
 
@@ -69,7 +69,7 @@ wsl --install -d Ubuntu-24.04 --location D:\WSL\Ubuntu\
 sudo passwd root
 ```
 
-wsl默认会将Windows的环境变量导入到Linux系统中，我强烈推荐你关闭这个功能，因为WSL2对Windows文件系统的访问速度非常慢，导致命令在查询时，速度会非常慢。你可以通过编辑`/etc/wsl.conf`文件来关闭这个功能，在文件中添加以下内容：
+wsl默认会将Windows的环境变量导入到Linux系统中，推荐关闭这个功能，因为WSL2对Windows文件系统的访问速度非常慢，导致bash在PATH中查询可执行文件时，速度会非常慢。你可以通过编辑`/etc/wsl.conf`文件来关闭这个功能，在文件中添加以下内容：
 
 ```ini
 [interop]
@@ -100,13 +100,15 @@ wsl --shutdown
 
 注意，关闭wsl也会关闭所有正在运行的wsl中的Linux发行版。此外，如果你更变Windows中的系统代理，也需要重新启动wsl才能生效。
 
-你可能发现在Ubuntu中使用`apt`命令时下载速度极慢，这时你需要更换镜像源，你需要编辑`/etc/apt/sources.list.d/ubuntu.sources`文件。详细编译内容，可以参考清华大学开源软件镜像站给出的[Ubuntu镜像源配置](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)，按照`DEB822 格式`配置。
+你可能发现在Ubuntu中使用`apt`命令时下载速度极慢，这时你需要更换镜像源，你需要编辑`/etc/apt/sources.list.d/ubuntu.sources`文件。详细编辑内容，可以参考清华大学开源软件镜像站给出的[Ubuntu镜像源配置](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)，按照`DEB822 格式`配置。
 
-注意，**在编辑前请一定要备份**，使用：
+<Aside type="caution">
+**在编辑前请一定要备份**，使用：
 
 ```bash
 sudo cp /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
 ```
+</Aside>
 
 配置完成后，使用以下命令更新apt缓存：
 
@@ -141,23 +143,23 @@ guiApplications=true
 
 ### /var/log/syslog文件过大
 
-wslg确实会存在问题，有时会不断地往`/var/log/syslog`中写入大量内容，间隔时间是毫秒级别的，这导致日志文件很容易就达到数GB的大小，虽然日志文件会定期清理，但这样还是会非常占据磁盘空间，而且影响日志查看。
+wslg的问题是非常多的，有时会不断地往`/var/log/syslog`中写入大量内容，间隔时间是毫秒级别的，这导致日志文件很容易就达到数GB的大小，虽然日志文件会定期清理，但这样还是会非常占据磁盘空间，而且影响日志查看。
 
 笔者由于更换过系统，已经无法复现这个问题了，如果你遇到了这个情况，欢迎在此处写下具体日志内容与解决方案。
 
 ### 在wsl中使用VSCode
 
-VSCode是特别支持wsl的，在正常情况下，可以使用`code`命令来让Windows中的VSCode远程连接到wsl中的Linux发行版，在连接前，你需要首先在Windows环境下下载了VSCode，然后会自动给你下载插件，接着就可以使用了。
+VSCode对wsl有特殊照顾，在正常情况下，可以使用`code`命令来让Windows中的VSCode远程连接到wsl中的Linux发行版，在连接前，你需要首先在Windows环境下下载VSCode（环境变量会自动设置），执行`code`命令后会自动给你下载插件，接着就可以使用了，无须依赖wslg。
 
-不过需要注意的是，由于在之前已经把Windows中的PATH从Linux的PATH中剔除了，所以`code`命令无法使用。解决方法很简单，所谓的`code`，其实是VSCode安装时，同时安装的一个bash脚本。如果你的VSCode下载在`D:\path\to\VSCode`目录下，那么`code`脚本就位于`D:\path\to\VSCode\bin`中，你只需要选择一个目录（一般是你的Linux环境中PATH中的某个目录），然后创建一个软链接指向`code`脚本即可。例如：
+不过需要注意的是，由于在之前你可能已经把Windows中的PATH从Linux的PATH中剔除了，所以`code`命令无法使用。解决方法很简单，所谓的`code`，其实是VSCode安装时，同时安装的一个bash脚本。如果你的VSCode下载在`D:\path\to\VSCode`目录下，那么`code`脚本就位于`D:\path\to\VSCode\bin`中，你只需要选择一个目录（一般是你的Linux环境中PATH中的某个目录），然后创建一个软链接指向`code`脚本即可。例如：
 
 ```bash
 ln -s /mnt/d/path/to/VSCode/bin/code /usr/local/bin/code
 ```
 
-### 无法在wsl中运行Windows的exe文件
+### 无法在wsl中运行Windows的可执行文件
 
-wsl中的Linux发行版是允许运行Windows的exe文件的，但往往会出现无法运行的情况。你可以参考这个issue中给出的[解决方案](https://github.com/microsoft/WSL/issues/8952#issuecomment-1568212651)。
+wsl中的Linux发行版是允许运行Windows的可执行文件的，但往往会出现无法运行的情况。你可以参考这个issue中给出的[解决方案](https://github.com/microsoft/WSL/issues/8952#issuecomment-1568212651)。
 
 我也把要执行的bash命令放在这里：
 
@@ -166,4 +168,4 @@ sudo sh -c 'echo :WSLInterop:M::MZ::/init:PF > /usr/lib/binfmt.d/WSLInterop.conf
 sudo systemctl restart systemd-binfmt
 ```
 
-为什么要运行exe文件？例如在neovim中，你可能会启用系统剪切板，为了让剪贴板的内容与Windows系统的剪贴板内容互通，你可能会使用`clip.exe`，这种情况下，你需要运行exe文件。
+为什么要运行Windows中的可执行文件？例如在neovim中，你可能会启用系统剪切板，为了让剪贴板的内容与Windows系统的剪贴板内容互通，你可能会使用`clip.exe`，这种情况下，你需要运行Windows中的可执行文件。

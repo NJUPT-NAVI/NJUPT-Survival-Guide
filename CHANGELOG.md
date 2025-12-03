@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.34.0...v1.35.0) (2025-12-03)
+
+
+### Features
+
+* **learn:** 增加wsl使用指南的章节 ([#100](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/100)) ([8852ee1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/8852ee1824176ab738122f621f2cc8ac284c8616))
+
 # [1.34.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.33.1...v1.34.0) (2025-10-24)
 
 

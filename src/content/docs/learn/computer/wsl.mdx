@@ -6,7 +6,7 @@ description: 关于使用WSL的指南
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="note">
-这个页面可能会有疏漏或不完善之处，欢迎大家提出建议或补充
+如果你在安装或者使用WSL的过程中遇到了本文档未覆盖到的问题，欢迎提交issue或者PR来完善本文档。
 </Aside>
 
 ## 为什么使用WSL？
@@ -161,7 +161,7 @@ ln -s /mnt/d/path/to/VSCode/bin/code /usr/local/bin/code
 
 wsl中的Linux发行版是允许运行Windows的可执行文件的，但往往会出现无法运行的情况。你可以参考这个issue中给出的[解决方案](https://github.com/microsoft/WSL/issues/8952#issuecomment-1568212651)。
 
-我也把要执行的bash命令放在这里：
+笔者也把要执行的bash命令放在这里：
 
 ```bash
 sudo sh -c 'echo :WSLInterop:M::MZ::/init:PF > /usr/lib/binfmt.d/WSLInterop.conf'
@@ -169,3 +169,66 @@ sudo systemctl restart systemd-binfmt
 ```
 
 为什么要运行Windows中的可执行文件？例如在neovim中，你可能会启用系统剪切板，为了让剪贴板的内容与Windows系统的剪贴板内容互通，你可能会使用`clip.exe`，这种情况下，你需要运行Windows中的可执行文件。
+
+### 安装最新版本的clang
+
+为什么要安装最新版本的`clang`？因为最新的语言特性需要你使用最新版本的编译器才能支持。如果你没有这个需求，你可以直接跳过这部分内容。
+
+为什么不使用`apt`直接安装？如果你是依照上面的方法安装Ubuntu的话，你会发现源中的`clang`版本可能不是最新的。
+
+例如，笔者在写这篇文章的时候，`Ubuntu noble`源中`clang`的最新版本是20，而最新的版本是21。
+
+如果你觉得这个版本已经足够用了，那么你可以直接使用：
+
+```bash
+sudo apt install clang-20
+```
+
+接下来讲解如何安装最新版本的`clang`。
+
+笔者并不推荐通过源码编译的方式来安装最新版本的`clang`，原因如下：
+
+- 较长的编译时间。笔者在自己的电脑上要花费3个小时及以上才能编译完`LLVM`项目的`clang`以及其他大部分组件。
+- 编译可能会出错。在编译过程中，非常容易出现不明原因出现错误，在删除某些编译文件后重新编译，又成功的情况。
+- 需要较大的内存。编译这种大项目往往使用多线程编译，这会占用大量内存。
+- 卸载麻烦。如果你删除了LLVM项目源文件，在卸载时，需要重新下载源文件，用相同的参数运行`./configure`，接着再使用`make uninstall`。（注：你也可以提前管理安装路径来避免这种麻烦，例如[这篇文章](https://unix.stackexchange.com/questions/16375/keeping-track-of-programs)提到的方法）
+
+LLVM官方已经为`Debian/Ubuntu`提供了预编译的二进制包，详见[官方网站](https://apt.llvm.org/)。
+
+安装方法如下：
+
+首先下载安装脚本并赋予可执行权限：
+
+```bash
+wget https://apt.llvm.org/llvm.sh
+chmod u+x llvm.sh
+```
+
+接下来下载你需要的版本，例如`21`：
+
+```bash
+sudo ./llvm.sh 21
+```
+
+<Aside type="caution">
+如果是你的源中已经有的版本，例如`20`，就不要使用这种方法来安装。
+</Aside>
+
+这个脚本会加入官方的apt源，更新缓存，并下载指定的`clang`版本到你的系统。
+
+此时应该安装好了`clang-21`，你可以使用以下命令来查看：
+
+```bash
+apt list --installed | grep clang
+clang-21 --version
+```
+
+这样，你就可以使用`apt`来方便地管理`clang`的安装、卸载和更新。
+
+需要注意的是，该脚本使用的是老的安装方法，该方法已经由于安全原因被弃用了，你可以参考[该网站](https://ubuntuhandbook.org/index.php/2023/09/how-to-install-clang-17-or-16-in-ubuntu-22-04-20-04/)来了解如何处理这个问题。
+
+LLVM项目的其他工具，例如`clang-tidy`, `clang-format`，默认不会安装，但你可以通过`apt`来很方便的安装，例如：
+
+```bash
+sudo apt install clang-tidy-21 clang-format-21
+```

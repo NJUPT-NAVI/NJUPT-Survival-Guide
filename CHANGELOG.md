@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.35.0...v1.36.0) (2025-12-04)
+
+
+### Features
+
+* add new ai app ([fc00db7](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/fc00db7fca76f76ffb48c242d546ffb7fc6054c7))
+
 # [1.35.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.34.0...v1.35.0) (2025-12-03)
 
 

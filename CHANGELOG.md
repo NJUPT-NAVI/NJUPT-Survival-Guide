@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.36.0...v1.37.0) (2025-12-04)
+
+
+### Features
+
+* **learn:** 更新黄页内容，新增江西老乡群链接 ([#103](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/103)) ([e032086](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/e032086426768754862b0e9127e28588a95607bd))
+
 # [1.36.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.35.0...v1.36.0) (2025-12-04)
 
 

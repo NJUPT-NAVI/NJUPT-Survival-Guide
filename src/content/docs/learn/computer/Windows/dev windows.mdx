@@ -1,0 +1,304 @@
+---
+title: Windows开发篇
+description: 从零设置Windows开发环境
+---
+
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+本篇假设你已经了解什么是命令行与终端，已经自行解决网络问题
+
+笔者已经数月没有实体机使用Windwos,以下内容在虚拟机测试
+
+如果你遇到了本文档未覆盖到的问题或者谬误，欢迎提交issue或者PR来完善本文档。
+</Aside>
+
+
+## 基本软件下载与包管理器设置
+
+
+### 使用x-cmd
+[x-cmd](https://cn.x-cmd.com/) 是一个开源命令行瑞士军刀，提供许多开箱即用功能，而且安装完全没有网络问题
+对于windows pwsh虽然只有小部分功能可用，依然是必备
+它可以自动配置winget与scoop镜像同时不影响正常使用
+
+使用PowerShell5安装
+win+r输入powershell
+```pwsh
+[System.Text.Encoding]::GetEncoding("utf-8").GetString($(Invoke-WebRequest -Uri "https://get.x-cmd.com/x-cmd.ps1").RawContentStream.ToArray()) | Invoke-Expression
+```
+其他安装方法自行查看官网
+
+### winget基本使用
+winget差不多是命令行版的MS Store
+win+r运行cmd
+```cmd
+winget search pwsh
+# 搜索描述含有pwsh的包
+winget install Microsoft.PowerShell 
+# 安装pwsh7
+winget search wt
+winegt install Microsoft.WindowsTerminal
+# 安装windwos terminal
+winget -?
+# 打印帮助信息,自行探索即可
+```
+<Aside type="note">
+如果遇到严重的网络问题，请使用[`x winget `](https://cn.x-cmd.com/mod/winget)交互式安装
+x-cmd会默认配置好镜像源
+</Aside>
+
+
+### 使用Windows Terminal
+Windows 有许多优秀终端比如`wezterm`，但是开箱即用这块还得是官方的`Windows Termianl`
+之后以`wt`来简称`windows termianl`，这也是它在环境变量中的名字
+
+win+r 输入wt,即可打开，点击标签页右侧
+设置默认配置文件为powershell
+默认终端应用程序为wt
+
+重启wt即可生效，现在你应该打开了powershell,之后以pwsh称呼它
+
+交互式安装提示符主题
+```pwsh
+x theme
+```
+如果你觉得没有喜欢的主题，暂时不要安装主题，之后可以通过scoop进行配置
+
+### scoop包管理器的使用
+
+#### 为什么使用scoop
+scoop社区比较大，并且可以自动配置环境变量，节省大量时间，这一点会在后续配置C++环境尤为明显
+
+以下操作可能损害你的系统，请你先通过搜索引擎或AI了解命令的作用再决定是否执行
+
+#### 安装scoop
+这里使用spc仓库，减少代理依赖，同时不用到处找仓库，但是会增加风险
+```pwsh
+# 脚本执行策略更改，默认自动同意
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
+
+# 方法一：执行安装命令（默认安装在用户目录下，如需更改请执行下面的“自定义安装目录”命令）
+iwr -useb scoop.201704.xyz | iex
+## 方法二：自定义安装目录（注意将目录修改为合适位置)
+#irm scoop.201704.xyz -outfile 'install.ps1'
+#.\install.ps1 -ScoopDir 'D:\Scoop' -ScoopGlobal
+```
+<Aside type="note">
+`Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force`
+该命令意味着执行第三方脚本运行将不再显示提醒你，静默执行的脚本具有和你一样的权限,可以读写文件，执行恶意程序
+当然安装并且及时更新卡巴斯基可以规避99%风险，审查运行的脚本则可以帮你规避100%风险
+
+以下命令可以打开安装脚本
+```pwsh
+irm scoop.201704.xyz -outfile 'install.ps1'
+notepad 'install.ps1'
+```
+</Aside>
+
+
+<Aside type="note">
+如果遇到严重的网络问题，请使用[`x scoop `](https://cn.x-cmd.com/mod/scoop)交互式安装
+x-cmd会默认配置好镜像源
+</Aside>
+#### scoop 基本使用
+
+查看帮助
+`scoop -h`
+搜索软件包
+`scoop search git`
+安装软件包
+`scoop install git`
+
+<Aside type="note">
+scoop安装软件包前会自动更新仓库，但是搜索不会,这可能会导致你遗漏最新版软件
+</Aside>
+
+更新仓库
+`scoop update`
+更新全部软件
+`scoop update *`
+
+安装字体
+```pwsh
+scoop bucket add nerd-fonts
+# 添加字体仓库
+scoop search jetbrain
+#搜索jetbrain字体
+scoop install JetBrainsMono-NF-Mono 
+# 其他字体自行探索
+````
+打开wt设置修改默认字体为JetBrainsMono-NF-Mono
+
+使用startship修改提示符主题
+`scoop install starship`
+根据提示修改$PROFILE即可
+
+替换scoop自带搜索功能
+```pwsh
+scoop install scoop-search
+notepad $PROFILE
+```
+添加以下内容
+`Invoke-Expression (&scoop-search --hook)`
+可以替代默认的scoop search
+
+#### scoop 进阶
+强烈建议只用scoop安装命令行软件，图形软件可能缺少维护，自带的自动更新会打乱scoop的更新~~点名firefox~~
+只在不得已情况下使用`scoop -g`安装软件，这会严重影响用户配置并且引起安全问题
+
+阻止应用更新
+`scoop hold app-name`
+打开应用官网
+`scoop home app-name`
+切换/修复环境变量
+`scoop reset python13`
+`scoop reset python14`
+清楚下载缓存与旧软件包
+`scoop -ak`
+
+
+配置virusTotal审查软件包比较麻烦，自行搜索罢
+
+#### scoop FAQ
+
+建议阅读[spc仓库的FAQ](https://github.com/lzwme/scoop-proxy-cn)
+
+
+## 配置Modern C/C++开发环境(clang+llvm-mingw+xmake为例)
+vscode+scoop 极大简化配置
+
+### scoop 命令
+为了快速安装llvm-mingw,需要添加一个仓库
+```pwsh
+scoop bucket add dorado https://github.com/chawyehsu/dorado
+````
+```pwsh
+scoop install scoop install dorado/llvm-mingw xmake mingw ninja clangd llvm 
+```
+
+### vscode配置
+[vscode下载](https://code.visualstudio.com/Download)
+优先使用用户级安装
+
+
+#### 插件安装
+必装:clangd codelldb xmake 
+
+可选: errorlens
+
+#### 插件设置
+`Ctrl+Shift+P`搜索user settings(json)打开文件加入以下内容
+```json
+{
+    "C_Cpp.intelliSenseEngine": "disabled",
+
+    // 是否检查插件冲突
+    "clangd.detectExtensionConflicts": true,
+    "clangd.path": "clangd",
+    // 查找的头文件路径，每一项前缀 -I                如果使用MinGW的话加入路径可以不需要在项目中配置，否则暂时忽视该项
+    "clangd.fallbackFlags": [],
+    "clangd.arguments": [
+	    // 在后台自动分析文件（基于complie_commands)
+        "--background-index",
+        // 标记compelie_commands.json文件的目录位置,根据项目设置修改 
+        "--compile-commands-dir=.vscode",
+        // 同时开启的任务数量
+        "-j=8",
+        // 全局补全（会自动补充头文件）
+        "--all-scopes-completion",
+        // 更详细的补全内容
+        "--completion-style=detailed",
+        // Include what you use
+        "--header-insertion=iwyu",
+        // pch优化的位置 disk memory
+        "--pch-storage=memory",
+        "--cross-file-rename",
+        "--enable-config",
+        // clang-format style to apply by default when no .clang-format file is found
+        "--fallback-style=WebKit",
+        "--pretty",
+        "--clang-tidy",
+        "--query-driver=clang++",
+    ],
+    "xmake.debugConfigType": "codelldb"
+}
+```
+### 项目配置
+新建hello-xmake文件夹并且使用vscode打开该文件夹
+文件夹下新建main.cpp
+```cpp
+#include <iostream>
+#include <print>
+#include <windows.h>
+
+
+int main() {
+    std::cout << "Hello from Clang+MinGW via XMake!" << std::endl;
+    auto str = "Modern CPP";
+    std::print("Hello,{}", str);
+    MessageBoxA(nullptr, "Clang+MinGW", "Demo", MB_OK);
+    return 0;
+}
+```
+
+新建xmake.lua
+```lua
+add_rules("mode.debug", "mode.release")   -- 让工程支持两种模式
+-- 指定工具链为 clang
+set_toolchains("clang")
+--指定CPP版本
+set_languages("c++23")
+
+target("hello")
+    set_kind("binary")
+    add_files("main.cpp")
+
+    -- 以下内容仅在使用mingw时添加，使用llvm-mingw删除即可
+    -- 让 clang 知道自己用的 MinGW 运行时
+    -- add_cxxflags("--target=x86_64-w64-windows-gnu") 
+
+
+    -- 把 MinGW 标准库头文件目录喂给 clang，同时写进 compile_commands.json
+    -- add_sysincludedirs("$(env PATH)/../include/c++/v1")          -- libc++ 头
+    -- add_sysincludedirs("$(env PATH)/../x86_64-w64-windows-gnu/include")  -- C 头
+```
+这时clangd应该已经可以识别标准库，可以看到变量类型悬浮提示，但仍然建议进行以下步骤以设置clangd
+
+Ctrl+\` 打开集成终端，输入`xmake build`,生成clangd需要的compile_commands.json
+
+
+
+{/* clang++ -S -emit-llvm main.cpp -o main.ll -I"C:\Users\ycna\scoop\apps\mingw\current\include\c++\13.2.0" -I"C:\Users\ycna\scoop\apps\mingw\current\include\c++\13.2.0\x86_64-w64-mingw32" -I"C:\Users\ycna\scoop\apps\mingw\current\x86_64-w64-mingw32\include" -target x86_64-w64-mingw32
+*/}
+
+### xmake
+`xmake build` 编译当前项目
+使用xmake插件底栏开发需要设置平台为`mingw`,默认的windows需要改掉，否则无法编译与调试
+
+### 调试设置
+强烈建议使用vscode的launch.json配置调试器，
+xmake自带调试按钮对源码与xmake.lua有任何都会强制你重新编译，不知道能不能关闭
+另外它的自定义程度太低，配置麻烦，新手用来过渡学习期勉勉强强可用
+
+以下为使用xmake插件调试按钮
+xmake插件设置（setting.json）
+"xmake.debugConfigType": "codelldb"
+
+如果你想要调试标准库需要设置codelldb
+
+"lldb.launch.initCommands": [
+    "settings set target.process.thread.step-avoid-regexp ''"
+]
+
+默认lldb会`智能`跳过标准库，关闭后就能步入了
+
+{/* # [lldb无法步入标准库](https://github.com/vadimcn/codelldb/issues/258#issuecomment-579569553)  */}
+
+{/* ### 关于module功能
+~~唉，说好的摩登C艹呢~~
+
+clang官方还没有完全支持该功能，但可以[使用git版尝鲜](https://clang.llvm.org/docs/index.html#)
+目前只有MSVC官方支持，如何在xmake中使用参见[该文](https://xmake.io/zh/examples/cpp/cxx-modules.html)
+ */}

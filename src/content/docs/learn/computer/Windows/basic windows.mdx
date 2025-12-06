@@ -1,0 +1,98 @@
+---
+title: Windows基础篇
+description: Windows简单设置
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+本篇假设你已经阅读[基础知识全部资料](../basic.mdx)
+笔者已经数月没有使用Windwos,如果你遇到了本文档未覆盖到的问题或者谬误，欢迎提交issue或者PR来完善本文档。
+</Aside>
+
+
+
+
+## 为什么需要管理Windows
+如果你长期使用电脑，那么你或早或晚会遇到以下问题:
+-  电脑卡顿，蓝屏
+-  磁盘空间不足,数据丢失
+-  隐私，数据泄漏
+-  硬件损坏
+-  Windows太难看了全是广告
+
+~~如果没有那么恭喜你可以跳过本篇了~~
+
+
+## 本篇环境
+- `Windows 11 25H2 26100`版本，如果你低于或高于该版本均问题不大，只要是win11就行，win10就不在讨论了
+- 已经解决网络问题
+
+
+## 美化
+
+### 去广告
+[开源去广告工具](https://github.com/TOP-01/OFGB_win11)
+自行承担第三方软件风险
+如果不想依赖软件手动逐个关闭也可以
+
+自行关闭Windows 底栏不需要的组件
+
+### 壁纸
+[开源壁纸引擎](https://github.com/Taiizor/Sucrose/blob/develop/README.zh-CN.md)
+[小红车](https://store.steampowered.com/app/431960/Wallpaper_Engine/)
+
+### 浏览器主页
+Edge浏览器默认主页通过右上角齿轮与右下角设置可以完全关闭广告
+
+## 推荐工具
+- Everything:全盘索引，光速查找文件，伟大无需多言,少数让我在Linux依然怀念的软件
+- BCUninstaller: 安全卸载软件
+ 
+
+## 隐私与安全
+不浏览，不接触可能带有病毒的风险内容和定时全盘扫描是防止隐私泄漏的根本
+
+### 安装合适的反病毒工具
+这里只推荐一个,[卡巴斯基免费版](https://www.kaspersky.com.cn/downloads/free-antivirus)
+免费版已经完全够用，更高需求可以自己上淘宝购买激活码(风险自负)
+
+如果你只想要一个安静的Windows Defender,[火绒](https://www.huorong.cn/person)也是不错的选择
+
+### 使用密码管理器
+如果你经常使用浏览器并且注册了一堆网站账户，那么密码管理器绝对是必备
+
+
+- keepass
+- bitwarden/vaultwarden(bitwarden 官方服务需付费,vaultwarden需要自建)
+
+<Aside type="note">
+需要更多补充
+</Aside>
+
+
+
+### 浏览器安装反追踪插件
+block origin等插件自行安装即可
+
+## 磁盘管理
+
+### C盘清理
+[知乎C盘清理链接,不要理会其中广告内容](https://zhuanlan.zhihu.com/p/711065615)
+
+### 使用BCUninstaller卸载不需要的Winodws组件
+以下组件卸载无风险:
+- Outlook
+- OneDrive
+- Edge 游戏助手
+- Office 365（如果你需要使用docx等请不要卸载）
+
+有一定风险:
+- Xbox Game UI
+
+<Aside type="note">
+需要更多补充
+</Aside>
+
+
+

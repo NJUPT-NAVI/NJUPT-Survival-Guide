@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.37.0...v1.38.0) (2025-12-08)
+
+
+### Features
+
+* **Learn:** 添加Windows 基础设置与开发环境设置 ([#104](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/104)) ([529f8a9](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/529f8a97a7dc071f2ab68b7138decb8c63eef713))
+
 # [1.37.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.36.0...v1.37.0) (2025-12-04)
 
 

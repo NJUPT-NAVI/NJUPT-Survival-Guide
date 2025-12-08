@@ -1,0 +1,133 @@
+## scoop 命令
+为了快速安装llvm-mingw,需要添加一个仓库
+```pwsh
+scoop bucket add dorado https://github.com/chawyehsu/dorado
+````
+```pwsh
+scoop install scoop install dorado/llvm-mingw xmake mingw ninja clangd llvm 
+```
+
+### vscode配置
+[vscode下载](https://code.visualstudio.com/Download)
+优先使用用户级安装
+
+
+#### 插件安装
+必装:clangd codelldb xmake 
+
+可选: errorlens
+
+#### 插件设置
+`Ctrl+Shift+P`搜索user settings(json)打开文件加入以下内容
+```json
+{
+    "C_Cpp.intelliSenseEngine": "disabled",
+
+    // 是否检查插件冲突
+    "clangd.detectExtensionConflicts": true,
+    "clangd.path": "clangd",
+    // 查找的头文件路径，每一项前缀 -I                如果使用MinGW的话加入路径可以不需要在项目中配置，否则暂时忽视该项
+    "clangd.fallbackFlags": [],
+    "clangd.arguments": [
+	    // 在后台自动分析文件（基于complie_commands)
+        "--background-index",
+        // 标记compelie_commands.json文件的目录位置,根据项目设置修改 
+        "--compile-commands-dir=.vscode",
+        // 同时开启的任务数量
+        "-j=8",
+        // 全局补全（会自动补充头文件）
+        "--all-scopes-completion",
+        // 更详细的补全内容
+        "--completion-style=detailed",
+        // Include what you use
+        "--header-insertion=iwyu",
+        // pch优化的位置 disk memory
+        "--pch-storage=memory",
+        "--cross-file-rename",
+        "--enable-config",
+        // clang-format style to apply by default when no .clang-format file is found
+        "--fallback-style=WebKit",
+        "--pretty",
+        "--clang-tidy",
+        "--query-driver=clang++",
+    ],
+    "xmake.debugConfigType": "codelldb"
+}
+```
+### 项目配置
+新建hello-xmake文件夹并且使用vscode打开该文件夹
+文件夹下新建main.cpp
+```cpp
+#include <iostream>
+#include <print>
+#include <windows.h>
+
+
+int main() {
+    std::cout << "Hello from Clang+MinGW via XMake!" << std::endl;
+    auto str = "Modern CPP";
+    std::print("Hello,{}", str);
+    MessageBoxA(nullptr, "Clang+MinGW", "Demo", MB_OK);
+    return 0;
+}
+```
+
+新建xmake.lua
+```lua
+add_rules("mode.debug", "mode.release")   -- 让工程支持两种模式
+-- 指定工具链为 clang
+set_toolchains("clang")
+--指定CPP版本
+set_languages("c++23")
+
+target("hello")
+    set_kind("binary")
+    add_files("main.cpp")
+
+    -- 以下内容仅在使用mingw时添加，使用llvm-mingw删除即可
+    -- 让 clang 知道自己用的 MinGW 运行时
+    -- add_cxxflags("--target=x86_64-w64-windows-gnu") 
+
+
+    -- 把 MinGW 标准库头文件目录喂给 clang，同时写进 compile_commands.json
+    -- add_sysincludedirs("$(env PATH)/../include/c++/v1")          -- libc++ 头
+    -- add_sysincludedirs("$(env PATH)/../x86_64-w64-windows-gnu/include")  -- C 头
+```
+这时clangd应该已经可以识别标准库，可以看到变量类型悬浮提示，但仍然建议进行以下步骤以设置clangd
+
+Ctrl+\` 打开集成终端，输入`xmake build`,生成clangd需要的compile_commands.json
+
+
+
+{/* clang++ -S -emit-llvm main.cpp -o main.ll -I"C:\Users\ycna\scoop\apps\mingw\current\include\c++\13.2.0" -I"C:\Users\ycna\scoop\apps\mingw\current\include\c++\13.2.0\x86_64-w64-mingw32" -I"C:\Users\ycna\scoop\apps\mingw\current\x86_64-w64-mingw32\include" -target x86_64-w64-mingw32
+*/}
+
+### xmake
+`xmake build` 编译当前项目
+使用xmake插件底栏开发需要设置平台为`mingw`,默认的windows需要改掉，否则无法编译与调试
+
+### 调试设置
+强烈建议使用vscode的launch.json配置调试器，
+xmake自带调试按钮对源码与xmake.lua有任何都会强制你重新编译，不知道能不能关闭
+另外它的自定义程度太低，配置麻烦，新手用来过渡学习期勉勉强强可用
+
+以下为使用xmake插件调试按钮
+xmake插件设置（setting.json）
+"xmake.debugConfigType": "codelldb"
+
+如果你想要调试标准库需要设置codelldb
+
+"lldb.launch.initCommands": [
+    "settings set target.process.thread.step-avoid-regexp ''"
+]
+
+默认lldb会`智能`跳过标准库，关闭后就能步入了
+
+{/* # [lldb无法步入标准库](https://github.com/vadimcn/codelldb/issues/258#issuecomment-579569553)  */}
+
+{/* ### 关于module功能
+~~唉，说好的摩登C艹呢~~
+
+clang官方还没有完全支持该功能，但可以[使用git版尝鲜](https://clang.llvm.org/docs/index.html#)
+目前只有MSVC官方支持，如何在xmake中使用参见[该文](https://xmake.io/zh/examples/cpp/cxx-modules.html)
+ */}

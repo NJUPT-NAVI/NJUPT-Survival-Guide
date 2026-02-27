@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.38.0...v1.39.0) (2026-02-27)
+
+
+### Features
+
+* **network:** 更新校园网问题通解与路由器安装指南，增强内容清晰度，添加了一些幽默:) ([#110](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/110)) ([b8f6076](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/b8f60764ebcf54f1b34ebff97b176c818d8cdc7b))
+
 # [1.38.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.37.0...v1.38.0) (2025-12-08)
 
 

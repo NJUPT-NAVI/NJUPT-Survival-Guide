@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.39.0...v1.40.0) (2026-03-08)
+
+
+### Features
+
+* **freshman:** 添加选课相关内容，包含很多常见问题回答 ([#111](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/111)) ([a0a7c97](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/a0a7c9787c412895a0326bff3788956317aa934a))
+
 # [1.39.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.38.0...v1.39.0) (2026-02-27)
 
 

@@ -88,6 +88,7 @@ export default defineConfig({
             },
 
             { label: "多而杂的默认密码", slug: "freshman/njupt_default_psw" },
+            { label: "选课相关", slug: "freshman/jwxt" },
           ],
         },
         {

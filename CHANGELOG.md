@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.40.0...v1.41.0) (2026-03-22)
+
+
+### Features
+
+* **life:** 添加校园网掉线问题解决方法、更新仙林快递取件流程与外卖取餐指南 ([#112](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/112)) ([e3225e3](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/e3225e304b63e6914fd0e2db84c57750dbca062b))
+
 # [1.40.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.39.0...v1.40.0) (2026-03-08)
 
 

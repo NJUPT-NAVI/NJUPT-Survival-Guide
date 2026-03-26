@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.42.0...v1.43.0) (2026-03-26)
+
+
+### Features
+
+* **learn:** 增加了科研绘图经验分享的章节 ([94dd29f](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/94dd29fd56d16f4c890d7a3edf2729c260100bff))
+
 # [1.42.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.41.0...v1.42.0) (2026-03-26)
 
 

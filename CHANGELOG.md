@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.41.0...v1.42.0) (2026-03-26)
+
+
+### Features
+
+* 补充了长江雨课堂重置密码的方法 ([d44555e](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/d44555eedc895cb95a260a24c2269671eec81167))
+
 # [1.41.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.40.0...v1.41.0) (2026-03-22)
 
 

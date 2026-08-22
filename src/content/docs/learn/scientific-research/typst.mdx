@@ -1,0 +1,71 @@
+---
+title: Word Latex 和 Typst
+description: 文档排版的三种选择
+---
+
+一般来说，平常的报告和文档排版工作会交给 Word 来完成，在面对科研论文写作的时候，我们会选择 Latex 来完成。
+但 Latex 因为历史悠久，许多设计思想在现代来看已经相当丑陋。用过的人都知道，它的工具和依赖安装都相当麻烦和大体积，它的报错信息极度不友好，有时为了解决编译报错需要安装相当冷门的宏包，对中文的支持也不友好。
+因此，一位德国学生在被 Latex 逼疯后，决定开发一种新的排版语言，这就是 Typst。
+Typst 的安装非常简单而且体积极小，排版效果和 Latex 几乎无异，语法也更为简洁（更省Token），对中文的支持也非常友好。与 Latex 相比唯一的缺点就是许多出版社和期刊还不接受 Typst 的投稿。
+
+下面是三种工具的衍生产品和辅助工具的推荐：
+
+## Word
+
+在 Office 中，已经存在 Claude 插件，具有一定修改文档的能力但是相当耗费 Token。可以用来进行平时的一些实验报告的辅助写作。
+
+一份值得一看的 Word 教程：
+[Word排版技巧&疑难杂症解决——四年使用经验分享](https://www.bilibili.com/video/BV13y4y1Y7RE/?share_source=copy_web&vd_source=4e6e3d05c54fbafa49b2a00b5cc81815)
+
+## Latex
+
+除了Overleaf，OpenAI 有推出一款产品来提供云端 Latex 编辑服务 [Prism](https://openai.com/zh-Hans-CN/prism/)
+
+在 Linux 平台上，如果需要正常编译出 PDF，可以参考以下脚本：
+
+```makefile
+# compilers
+XETEXC  := /usr/bin/xelatex  # 使用XeLaTex引擎
+BIBTEXC := /usr/bin/bibtex   # 参考文献处理工具
+LATEXC  := /usr/bin/pdflatex # PDFLaTeX引擎
+
+# paths
+PROJECT_ROOT := $(shell pwd)
+OUTPUT_DIR := $(PROJECT_ROOT)/out
+
+# sources
+PAPER_BUILD_SOURCE := $(PROJECT_ROOT)/latex/main.tex
+
+define _clean =
+	-@rm -f $(OUTPUT_DIR)/*.{aux,bbl,blg,out,toc}
+	-@rm -rf $(OUTPUT_DIR)/references
+	-@rm -f $(PROJECT_ROOT)/latex/*.{aux,fdb_latexmk,fls,log}
+	-@rm -f $(PROJECT_ROOT)/*.{aux,fdb_latexmk,fls,log,xdv,toc}
+endef
+
+all : paper clean
+	@xdg-open ./out/main.pdf
+
+paper : $(PAPER_BUILD_SOURCE)
+	@mkdir -p $(OUTPUT_DIR)
+	@$(XETEXC) --output-directory=$(OUTPUT_DIR) $(PAPER_BUILD_SOURCE)	# 首次编译
+ifdef configbib
+	@cp -r ./latex/references/ $(OUTPUT_DIR)/							# 复制参考文献
+	@cd $(OUTPUT_DIR) && $(BIBTEXC) main.aux							# 处理参考文献
+endif
+	@$(XETEXC) --output-directory=$(OUTPUT_DIR) $(PAPER_BUILD_SOURCE)	# 二次编译
+	@$(XETEXC) --output-directory=$(OUTPUT_DIR) $(PAPER_BUILD_SOURCE)	# 三次编译
+	@$(XETEXC) --output-directory=$(OUTPUT_DIR) $(PAPER_BUILD_SOURCE)	# 四次编译
+	$(_clean)
+
+preview:
+	@xdg-open ./out/main.pdf
+
+clean :
+	$(_clean)
+```
+
+## Typst
+
+因为笔者经常使用飞书云文档进行协作，云文档默认的PDF导出出来的PDF字体异常的大，我就稍微 Vibe 了一个小工具来将飞书云文档用 Typst 来排版导出一个默认看起来还算舒服的PDF样式。
+[LarkMd2Pdf](https://github.com/kingpoem/LarkMd2Pdf)

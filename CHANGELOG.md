@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.46.0...v1.47.0) (2026-08-22)
+
+
+### Features
+
+* **slidev:** 新增了使用slidev进行PPT制作 ([250920d](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/250920dbd63698a4afc47e04981305efc523d7b1))
+
 # [1.46.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.45.0...v1.46.0) (2026-08-22)
 
 

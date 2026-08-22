@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.44.0...v1.45.0) (2026-08-22)
+
+
+### Features
+
+* **typst:** 新增文档排版的三种选择 ([d8c332a](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/d8c332afe6669bfd12c341b6bee6ed0ec24cb0f8))
+
 # [1.44.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.43.0...v1.44.0) (2026-04-28)
 
 

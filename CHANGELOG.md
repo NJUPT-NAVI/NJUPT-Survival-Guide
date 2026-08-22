@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.45.0...v1.46.0) (2026-08-22)
+
+
+### Features
+
+* **claim:** 新增学校财务报销流程 ([a17fb1f](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/a17fb1f78b005647e0b7a377560a56072eb0a5e0))
+
 # [1.45.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.44.0...v1.45.0) (2026-08-22)
 
 

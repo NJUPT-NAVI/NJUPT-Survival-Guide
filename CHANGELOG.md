@@ -1,3 +1,15 @@
+# [1.48.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.47.1...v1.48.0) (2026-08-22)
+
+
+### Bug Fixes
+
+* **passport:** 修正护照指南内容 ([7233891](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/7233891fe4328817c1296cce90c9f8587e2feb88))
+
+
+### Features
+
+* **passport:** 新增护照办理指南 ([295d5e7](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/295d5e7b9f9fc04b2030e33188cfd10a87fbe548))
+
 ## [1.47.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.47.0...v1.47.1) (2026-08-22)
 
 

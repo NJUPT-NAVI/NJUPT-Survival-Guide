@@ -1,3 +1,10 @@
+## [1.47.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.47.0...v1.47.1) (2026-08-22)
+
+
+### Bug Fixes
+
+* fix [#29](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/29) ([22e4fdd](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/22e4fddb321ec157f24b3263e7864e635aaa2788))
+
 # [1.47.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.46.0...v1.47.0) (2026-08-22)
 
 

@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.48.0...v1.48.1) (2026-08-30)
+
+
+### Bug Fixes
+
+* fix[#123](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/123) 为passport页面添加一个slug ([4669a2a](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/4669a2a5fcc5228b15531565839ba1ece7ed9ff0))
+
 # [1.48.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.47.1...v1.48.0) (2026-08-22)
 
 

@@ -133,15 +133,12 @@ export default defineConfig({
                 { label: "学生事务中心", slug: "life/aroundschool/service_center" },
                 // 将 campus_introduction 这个目录作为一个组，并改中文标题
                 { label: "仙林校区周边设施", slug: "life/aroundschool/xianlin" },
-
-
+                { label: "护照办理攻略", slug: "life/aroundschool/passport" },
                 {
                   label: "学校服务",
                   collapsed: true,
                   autogenerate: { directory: "life/aroundschool/service" },
                 },
-
-
               ],
             },
           ],

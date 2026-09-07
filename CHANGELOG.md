@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.48.1...v1.49.0) (2026-09-07)
+
+
+### Features
+
+* **tools:** 新增NDM下载器和PDFgear PDF工具使用指南 ([#125](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/issues/125)) ([86e3b88](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/86e3b880e1f04e4e31912de8f297a76f82091c8c))
+
 ## [1.48.1](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.48.0...v1.48.1) (2026-08-30)
 
 

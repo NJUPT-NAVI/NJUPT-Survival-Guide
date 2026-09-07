@@ -228,6 +228,8 @@ export default defineConfig({
                 { label: "PotPlay 播放器", slug: "learn/useful_tools/potplayer" },
                 { label: "Windows 和 Office 激活", slug: "learn/useful_tools/win_acti" },
                 { label: "浏览器使用", slug: "learn/useful_tools/stfw" },
+                { label: "NDM 下载器", slug: "learn/useful_tools/ndm" },
+                { label: "PDFgear PDF 工具", slug: "learn/useful_tools/pdfgear" },
 
 
               ]

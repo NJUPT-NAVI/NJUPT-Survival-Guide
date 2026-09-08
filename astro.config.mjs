@@ -121,6 +121,11 @@ export default defineConfig({
               autogenerate: { directory: "life/charge" }
             },
             {
+              label: "请销假与访客入校",
+              collapsed: true,
+              autogenerate: { directory: "life/leavelog" },
+            },
+            {
               label: "校车时间地点",
               collapsed: true,
               autogenerate: { directory: "life/transportation/" },

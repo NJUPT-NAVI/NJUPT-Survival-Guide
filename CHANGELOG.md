@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.49.0...v1.50.0) (2026-09-10)
+
+
+### Features
+
+* **docs:** 依据2026版学生手册与当年官方通知校准34页内容 ([cfd8da2](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/commit/cfd8da250d08da20e843df611afa2282b7a173b9))
+
 # [1.49.0](https://github.com/NJUPT-NAVI/NJUPT-Survival-Guide/compare/v1.48.1...v1.49.0) (2026-09-07)
 
 
